@@ -1,4 +1,4 @@
-   <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -52,6 +52,12 @@
             margin-bottom: 1rem;
         }
 
+        header .hero-image {
+            max-width: 90%;
+            border-radius: 10px;
+            margin-top: 1rem;
+        }
+
         .menu {
             position: fixed;
             top: 0;
@@ -100,7 +106,7 @@
             max-width: 800px;
             text-align: center;
             padding: 2rem;
-            margin-top: 4rem;
+            margin-top: 5rem;
         }
 
         .btn {
@@ -120,9 +126,8 @@
         }
 
         .embeds {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 1rem;
             margin-top: 2rem;
         }
@@ -132,19 +137,20 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            max-width: 250px;
             text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
         }
 
         .embed:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
             box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5);
         }
 
         .embed img {
-            width: 100%;
+            width: 80%;
             height: auto;
+            margin-top: 1rem;
+            border-radius: 10px;
         }
 
         .embed p {
@@ -163,7 +169,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0.75rem 1.5rem;
+            padding: 0.5rem 1rem;
             background-color: var(--button-bg);
             color: var(--text-color);
             border-radius: 5px;
@@ -183,11 +189,11 @@
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
             text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
         }
 
         .stats:hover {
-            transform: scale(1.05);
+            transform: scale(1.03);
             box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5);
         }
 
@@ -241,6 +247,7 @@
     <header>
         <img src="bot_logo.png" alt="Bot Logo">
         <h1>Zump Bot</h1>
+        <img class="hero-image" src="hero_image.png" alt="Imagem do Zump Bot">
     </header>
     <main>
         <p>Bem-vindo ao site do nosso bot do Discord! Nosso bot foi criado para ajudar a administrar servidores e oferecer funcionalidades incríveis.</p>
@@ -251,7 +258,7 @@
         <div class="embeds">
             <div class="embed">
                 <img src="https://imgur.com/vEtkJXB.png" alt="Funcionalidade 1">
-                <p>Divertir com comandos de diversão para a sua comunidades.</p>
+                <p>Divertir com comandos de diversão para a sua comunidade.</p>
             </div>
             <div class="embed">
                 <img src="https://imgur.com/u6sdUqL.png" alt="Funcionalidade 2">
@@ -259,7 +266,7 @@
             </div>
             <div class="embed">
                 <img src="https://imgur.com/Nnmgjtz.png" alt="Funcionalidade 3">
-                <p>Tenha uma económia com recursos avançados.</p>
+                <p>Tenha uma economia com recursos avançados.</p>
             </div>
         </div>
         <div class="stats">
@@ -269,4 +276,9 @@
                 <p><strong>Usuários:</strong> 0</p>
             </div>
         </div>
-    </main
+    </main>
+    <footer>
+        <p>&copy; 2025 Zump Bot. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
