@@ -26,103 +26,96 @@
         header {
             background: #4682b4;
             color: #fff;
-            padding: 1rem 2rem;
+            padding: 0.5rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: bold;
+            cursor: pointer;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
         }
 
         .menu {
             list-style: none;
             display: flex;
-            gap: 1rem;
+            gap: 1.5rem;
         }
 
         .menu a {
             color: #fff;
             text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: color 0.3s;
         }
 
-        .hero {
+        .menu a:hover {
+            color: #ffeb3b;
+        }
+
+        /* Botão de menu hambúrguer */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            height: 3px;
+            width: 25px;
+            background: #fff;
+            margin: 3px 0;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .menu.active {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 60vh;
-            color: #fff;
-            text-align: center;
-            background: linear-gradient(120deg, #4682b4, #5c9ead);
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-        }
-
-        .btn-primary {
-            padding: 0.8rem 1.5rem;
-            background: #5c9ead;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
-
-        .btn-primary:hover {
+            flex-direction: column;
+            position: absolute;
+            top: 60px;
+            right: 20px;
             background: #4682b4;
-        }
-
-        #features, #statistics {
-            padding: 2rem;
-        }
-
-        .features-grid, .statistics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-
-        .feature-item, .stat-item {
-            background: #ffffff;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .feature-item:hover, .stat-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        .feature-item i, .stat-item i {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            color: #4682b4;
-        }
-
-        footer {
-            background: #4682b4;
-            color: #fff;
-            text-align: center;
             padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilo responsivo */
+        @media screen and (max-width: 768px) {
+            .menu {
+                display: none;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
         }
     </style>
 </head>
 <body>
   <header>
+    <div class="logo">Zump Bot</div>
     <nav class="navbar">
-      <div class="logo">Zump Bot</div>
-      <ul class="menu">
+      <div class="menu-toggle" id="mobile-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <ul class="menu" id="menu">
         <li><a href="#home">Início</a></li>
         <li><a href="#features">Recursos</a></li>
         <li><a href="#statistics">Estatísticas</a></li>
@@ -174,5 +167,15 @@
   <footer>
     <p>© 2025 Zump Bot. Todos os direitos reservados.</p>
   </footer>
+
+  <script>
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menu = document.getElementById('menu');
+
+    mobileMenu.addEventListener('click', () => {
+      menu.classList.toggle('active');
+      mobileMenu.classList.toggle('open');
+    });
+  </script>
 </body>
 </html>
