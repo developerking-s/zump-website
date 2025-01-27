@@ -2,16 +2,120 @@
 <html lang="en">
 <head>
     <meta property="og:title" content="Website do Zump Bot">
-    <meta property="og:description" content="Olá, eu me chamo Zump, e tenho 15 aninhos!  Fui desenvolvido com o objetivo de trazer mais alegria e animação para o seu servidor!">
+    <meta property="og:description" content="Olá, eu me chamo Zump, e tenho 15 aninhos! Fui desenvolvido com o objetivo de trazer mais alegria e animação para o seu servidor!">
     <meta name="theme-color" content="#ffffff">
- <meta property="og:image" content="https://imgur.com/Nnmgjtz.png">
-<link rel="icon"href=l"https://imgur.com/Nnmgjtz.jpg" type="image/x-icon">
- <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
-<title>Zump Bot</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
+    <meta property="og:image" content="https://imgur.com/Nnmgjtz.png">
+    <link rel="icon" href="https://imgur.com/Nnmgjtz.jpg" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zump Bot</title>
+
+    <!-- Link para a biblioteca FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <style>
+        /* Estilo geral */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            transition: background 0.3s, color 0.3s;
+            background: #f0f8ff;
+            color: #333;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        header {
+            background: #4682b4;
+            color: #fff;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .menu {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+        }
+        .menu a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .hero {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60vh;
+            color: #fff;
+            position: relative;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .btn-primary {
+            padding: 0.8rem 1.5rem;
+            background: #5c9ead;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .btn-primary:hover {
+            background: #4682b4;
+        }
+
+        /* Animação de quadrados */
+        .moving-squares {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .square {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: #4682b4;
+            opacity: 0;
+            animation: squareAnimation 4s infinite ease-out;
+        }
+
+        @keyframes squareAnimation {
+            0% {
+                transform: scale(0) translate(0, 0);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.5) translate(30px, 30px);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(0) translate(-30px, -30px);
+                opacity: 0;
+            }
+        }
+
+        footer {
+            background: #4682b4;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+        }
+    </style>
 </head>
 <body>
   <header>
@@ -20,49 +124,72 @@
       <ul class="menu">
         <li><a href="#home">Início</a></li>
         <li><a href="#features">Recursos</a></li>
-        <li><a href="#about">Sobre</a></li>
-        <li><a href="#contact">Contato</a></li>
-        <li><a href="https://discord.com/oauth2/authorize?client_id=1302728067789099139" class="btn">Convidar Bot</a></li>
+        <li><a href="#statistics">Estatísticas</a></li>
+        <li><a href="https://discord.com/oauth2/authorize?client_id=1302728067789099139" class="btn">Adicionar Bot</a></li>
       </ul>
-      <div class="menu-toggle" id="mobile-menu">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </div>
     </nav>
   </header>
 
   <section id="home" class="hero">
     <div class="hero-content">
-      <h1>Gerencie seu Discord com facilidade</h1>
-      <p>Um bot completo para ajudar sua comunidade a crescer!</p>
+      <h1>Bem-vindo ao Zump Bot!</h1>
+      <p>Traga diversão e organização ao seu servidor com nosso bot completo!</p>
       <a href="https://discord.com/oauth2/authorize?client_id=1302728067789099139" class="btn-primary">Adicione-Me</a>
     </div>
+    <!-- Animação de quadrados -->
+    <div class="moving-squares" id="squares-container"></div>
   </section>
 
   <section id="features">
-    <h2>Recursos do Bot</h2>
+    <h2>Recursos do Zump Bot</h2>
     <div class="features-grid">
-      <div class="feature-item">📜 Moderação Automática</div>
-      <div class="feature-item">🎵 Comandos de Diversão</div>
-      <div class="feature-item">📊 Uma Economia Global</div>
+      <div class="feature-item">
+        <i class="fas fa-music"></i>
+        <p>Música para todos</p>
+      </div>
+      <div class="feature-item">
+        <i class="fas fa-chart-pie"></i>
+        <p>Economia Global</p>
+      </div>
+      <div class="feature-item">
+        <i class="fas fa-gamepad"></i>
+        <p>Jogos divertidos</p>
+      </div>
     </div>
   </section>
 
-  <section id="about">
-    <h2>Sobre o Zump</h2>
-    <p>Olá, eu me chamo Zump, e tenho 15 aninhos!  Fui desenvolvido com o objetivo de trazer mais alegria e animação para o seu servidor! 
-Minha missão é ajudar e divertir pessoas do mundo inteiro! Para isso, programei um bot que tem a minha determinação, é grandes sonhos... e ele mora aqui dentro de mim!</p>
-  </section>
-
-  <section id="contact">
-    <h2>Fale Conosco</h2>
-    <p>Entre em contato para suporte ou sugestões!</p>
-    <a href="https://discord.gg/rhxveR9s5A" class="btn-secondary">Servidor de Discord</a>
+  <section id="statistics">
+    <h2>Estatísticas do Bot</h2>
+    <div class="statistics-grid">
+      <div class="stat-item">
+        <i class="fas fa-server"></i>
+        <p><strong>Servidores:</strong> 1,250</p>
+      </div>
+      <div class="stat-item">
+        <i class="fas fa-users"></i>
+        <p><strong>Usuários:</strong> 35,000+</p>
+      </div>
+    </div>
   </section>
 
   <footer>
     <p>© 2025 Zump Bot. Todos os direitos reservados.</p>
   </footer>
+
+  <script>
+    // Função para adicionar quadrados na tela conforme o movimento do mouse
+    document.addEventListener('mousemove', function(e) {
+        const square = document.createElement('div');
+        square.classList.add('square');
+        square.style.left = `${e.pageX - 25}px`;
+        square.style.top = `${e.pageY - 25}px`;
+        document.getElementById('squares-container').appendChild(square);
+
+        // Remover quadrados após a animação
+        setTimeout(() => {
+            square.remove();
+        }, 4000);
+    });
+  </script>
 </body>
 </html>
