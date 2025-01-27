@@ -11,49 +11,44 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <title>Zump Bot</title>
     <style>
-        /* Tela de carregamento */
-        #preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #4682b4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-
-        #preloader div {
-            width: 50px;
-            height: 50px;
-            border: 5px solid #fff;
-            border-top: 5px solid #ffeb3b;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* Estilo geral */
-        body {
+        /* Reset e estilo global */
+        * {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(120deg, #f0f8ff, #b0c4de);
-            color: #333;
+            padding: 0;
+            box-sizing: border-box;
         }
 
+        body {
+            font-family: Arial, sans-serif;
+            background: var(--bg-color, #f0f8ff);
+            color: var(--text-color, #333);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        :root {
+            --bg-color: #f0f8ff;
+            --text-color: #333;
+            --header-bg: #4682b4;
+            --header-text: #fff;
+            --card-bg: #fff;
+            --card-text: #333;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #fff;
+            --header-bg: #1e1e1e;
+            --header-text: #ccc;
+            --card-bg: #1e1e1e;
+            --card-text: #fff;
+            --shadow: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Header */
         header {
-            background: #4682b4;
-            color: white;
+            background: var(--header-bg);
+            color: var(--header-text);
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
@@ -61,6 +56,7 @@
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0px 4px 6px var(--shadow);
         }
 
         .logo {
@@ -72,10 +68,10 @@
 
         @keyframes glow {
             from {
-                text-shadow: 0 0 10px #00aaff, 0 0 20px #00aaff, 0 0 30px #00aaff;
+                text-shadow: 0 0 10px #00aaff, 0 0 20px #00aaff;
             }
             to {
-                text-shadow: 0 0 20px #00ccff, 0 0 40px #00ccff, 0 0 60px #00ccff;
+                text-shadow: 0 0 20px #00ccff, 0 0 40px #00ccff;
             }
         }
 
@@ -93,7 +89,7 @@
         }
 
         ul.menu li a {
-            color: white;
+            color: var(--header-text);
             text-decoration: none;
             font-weight: bold;
             transition: color 0.3s;
@@ -113,14 +109,14 @@
         .menu-toggle span {
             height: 3px;
             width: 25px;
-            background: white;
+            background: var(--header-text);
         }
 
         @media (max-width: 768px) {
             ul.menu {
                 display: none;
                 flex-direction: column;
-                background: #4682b4;
+                background: var(--header-bg);
                 position: absolute;
                 top: 60px;
                 right: 10px;
@@ -137,21 +133,31 @@
             }
         }
 
-        section {
-            text-align: center;
-            padding: 4rem 2rem;
+        .theme-toggle {
+            background: none;
+            border: 2px solid var(--header-text);
+            border-radius: 50%;
+            padding: 0.3rem;
+            cursor: pointer;
+            transition: background 0.3s;
         }
 
+        .theme-toggle:hover {
+            background: var(--header-text);
+            color: var(--header-bg);
+        }
+
+        /* Hero */
         .hero {
-            background: #4682b4;
-            color: white;
+            text-align: center;
             padding: 4rem 2rem;
+            background: var(--header-bg);
+            color: var(--header-text);
         }
 
         .hero h1 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
-            animation: fadeIn 1s ease-in-out;
         }
 
         .btn-primary {
@@ -168,29 +174,24 @@
             background: #ffc107;
         }
 
-        footer {
-            text-align: center;
-            padding: 1rem 0;
-            background: #4682b4;
-            color: white;
-        }
-
+        /* Features */
         .features {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 2rem;
+            padding: 4rem 2rem;
         }
 
         .feature {
-            background: white;
+            background: var(--card-bg);
+            color: var(--card-text);
             padding: 1.5rem;
             border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 20px var(--shadow);
             transition: transform 0.3s, box-shadow 0.5s ease-in-out;
             width: 300px;
             text-align: center;
-            animation: fadeUp 1s ease-in-out;
         }
 
         .feature:hover {
@@ -200,57 +201,19 @@
 
         .feature i {
             font-size: 2rem;
-            color: #4682b4;
             margin-bottom: 1rem;
         }
 
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .statistics {
-            margin-top: 3rem;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2rem;
-        }
-
-        .stat {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.5s ease-in-out;
+        /* Footer */
+        footer {
             text-align: center;
-            width: 200px;
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        .stat:hover {
-            box-shadow: 0 0 20px #00aaff, 0 0 40px #00ccff;
-        }
-
-        .stat i {
-            font-size: 2.5rem;
-            color: #4682b4;
-            margin-bottom: 0.5rem;
+            padding: 1rem;
+            background: var(--header-bg);
+            color: var(--header-text);
         }
     </style>
 </head>
 <body>
-    <!-- Preloader -->
-    <div id="preloader">
-        <div></div>
-    </div>
-
     <!-- Header -->
     <header>
         <div class="logo">Zump Bot</div>
@@ -264,7 +227,11 @@
                 <li><a href="#home">Início</a></li>
                 <li><a href="#features">Recursos</a></li>
                 <li><a href="#stats">Estatísticas</a></li>
-                <li><a href="https://discord.com/oauth2/authorize?client_id=1302728067789099139" class="btn-primary">Adicionar Bot</a></li>
+                <li>
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Alternar Tema">
+                        <i class="fas fa-adjust"></i>
+                    </button>
+                </li>
             </ul>
         </nav>
     </header>
@@ -297,47 +264,29 @@
         </div>
     </section>
 
-    <!-- Statistics -->
-    <section id="stats">
-        <h2>Estatísticas</h2>
-        <div class="statistics">
-            <div class="stat">
-                <i class="fas fa-user-friends"></i>
-                <h3>500+</h3>
-                <p>Usuários ativos</p>
-            </div>
-            <div class="stat">
-                <i class="fas fa-server"></i>
-                <h3>50+</h3>
-                <p>Servidores</p>
-            </div>
-            <div class="stat">
-                <i class="fas fa-clock"></i>
-                <h3>99.9%</h3>
-                <p>Uptime</p>
-            </div>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer>
         <p>© 2025 Zump Bot. Todos os direitos reservados.</p>
     </footer>
 
     <script>
-        // Preloader
-        window.addEventListener('load', () => {
-            const preloader = document.getElementById('preloader');
-            preloader.style.opacity = '0';
-            setTimeout(() => preloader.style.display = 'none', 500);
-        });
-
         // Menu Responsivo
         const menuToggle = document.getElementById('menu-toggle');
         const menu = document.getElementById('menu');
-
         menuToggle.addEventListener('click', () => {
             menu.classList.toggle('active');
+        });
+
+        // Alternar Tema (Modo Claro/Escuro)
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        themeToggle.addEventListener('click', () => {
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+            }
         });
     </script>
 </body>
