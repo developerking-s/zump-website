@@ -1,0 +1,123 @@
+/* styles.css */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+
+header {
+  background: #7289da;
+  color: white;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar .menu {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navbar .menu li {
+  display: inline;
+}
+
+.navbar .menu a {
+  color: white;
+  text-decoration: none;
+}
+
+.navbar .btn {
+  background: #5865f2;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.navbar .menu-toggle {
+  display: none;
+  cursor: pointer;
+}
+
+.navbar .menu-toggle .bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  background: white;
+}
+
+.hero {
+  text-align: center;
+  background: #5865f2;
+  color: white;
+  padding: 3rem 2rem;
+}
+
+.hero-content .btn-primary {
+  background: white;
+  color: #5865f2;
+  padding: 0.8rem 1.5rem;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+section {
+  padding: 2rem;
+  text-align: center;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.feature-item {
+  background: #f0f0f0;
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+footer {
+  background: #333;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+}
+
+@media (max-width: 768px) {
+  .navbar .menu {
+    display: none;
+    flex-direction: column;
+    background: #7289da;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 100%;
+  }
+
+  .navbar .menu.active {
+    display: flex;
+  }
+
+  .navbar .menu-toggle {
+    display: block;
+  }
+}
