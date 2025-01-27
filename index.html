@@ -31,7 +31,7 @@
             border: 5px solid #fff;
             border-top: 5px solid #ffeb3b;
             border-radius: 50%;
-            animation: spin 1s linear infinite;
+            animation: spin 5s linear infinite;
         }
 
         @keyframes spin {
@@ -140,6 +140,7 @@
         .hero h1 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
+            animation: fadeIn 1s ease-in-out;
         }
 
         .btn-primary {
@@ -161,7 +162,69 @@
             padding: 1rem 0;
             background: #4682b4;
             color: white;
-            margin-top: 2rem;
+        }
+
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .feature {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            width: 300px;
+            text-align: center;
+            animation: fadeUp 1s ease-in-out;
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature i {
+            font-size: 2rem;
+            color: #4682b4;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .statistics {
+            margin-top: 3rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .stat {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 200px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .stat i {
+            font-size: 2.5rem;
+            color: #4682b4;
+            margin-bottom: 0.5rem;
         }
     </style>
 </head>
@@ -171,7 +234,7 @@
         <div></div>
     </div>
 
-    <!-- Cabeçalho -->
+    <!-- Header -->
     <header>
         <div class="logo">Zump Bot</div>
         <nav>
@@ -183,7 +246,7 @@
             <ul class="menu" id="menu">
                 <li><a href="#home">Início</a></li>
                 <li><a href="#features">Recursos</a></li>
-                <li><a href="#contact">Contato</a></li>
+                <li><a href="#stats">Estatísticas</a></li>
                 <li><a href="https://discord.com/oauth2/authorize?client_id=1302728067789099139" class="btn-primary">Adicionar Bot</a></li>
             </ul>
         </nav>
@@ -195,10 +258,48 @@
         <p>Traga diversão e organização ao seu servidor com nosso bot completo!</p>
     </section>
 
-    <!-- Recursos -->
+    <!-- Features -->
     <section id="features">
         <h2>Recursos</h2>
-        <p>Descubra como o Zump Bot pode facilitar o gerenciamento do seu servidor!</p>
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-tools"></i>
+                <h3>Utilidades</h3>
+                <p>Comandos úteis para gerenciar seu servidor de forma eficiente.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-laugh"></i>
+                <h3>Diversão</h3>
+                <p>Minigames e interações engraçadas para entreter os usuários.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-coins"></i>
+                <h3>Economia</h3>
+                <p>Crie um sistema de moedas único e incentive a participação!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics -->
+    <section id="stats">
+        <h2>Estatísticas</h2>
+        <div class="statistics">
+            <div class="stat">
+                <i class="fas fa-user-friends"></i>
+                <h3>500+</h3>
+                <p>Usuários ativos</p>
+            </div>
+            <div class="stat">
+                <i class="fas fa-server"></i>
+                <h3>50+</h3>
+                <p>Servidores</p>
+            </div>
+            <div class="stat">
+                <i class="fas fa-clock"></i>
+                <h3>99.9%</h3>
+                <p>Uptime</p>
+            </div>
+        </div>
     </section>
 
     <!-- Footer -->
