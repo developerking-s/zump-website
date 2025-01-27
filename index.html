@@ -18,38 +18,41 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            transition: background 0.3s, color 0.3s;
             background: #f0f8ff;
             color: #333;
         }
 
         header {
             background: #4682b4;
-            color: #fff;
-            padding: 0.5rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
             display: flex;
+            justify-content: space-between;
             align-items: center;
         }
 
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
         .menu {
-            list-style: none;
             display: flex;
+            list-style: none;
             gap: 1.5rem;
         }
 
@@ -57,15 +60,25 @@
             color: #fff;
             text-decoration: none;
             font-size: 1rem;
-            font-weight: 600;
-            transition: color 0.3s;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .menu a:hover::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #fff;
+            transition: all 0.3s;
         }
 
         .menu a:hover {
             color: #ffeb3b;
         }
 
-        /* Botão de menu hambúrguer */
         .menu-toggle {
             display: none;
             flex-direction: column;
@@ -76,28 +89,37 @@
             height: 3px;
             width: 25px;
             background: #fff;
-            margin: 3px 0;
-            transition: all 0.3s ease-in-out;
+            margin: 4px 0;
+            transition: all 0.3s ease;
         }
 
         .menu.active {
-            display: flex;
             flex-direction: column;
             position: absolute;
             top: 60px;
-            right: 20px;
-            background: #4682b4;
-            padding: 1rem;
-            border-radius: 10px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            left: 0;
+            width: 100%;
+            background: #5c9ead;
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        /* Estilo responsivo */
-        @media screen and (max-width: 768px) {
+        .menu.active a {
+            padding: 0.5rem 1rem;
+        }
+
+        .menu.active a:hover {
+            color: #ffeb3b;
+        }
+
+        @media (max-width: 768px) {
             .menu {
                 display: none;
                 flex-direction: column;
-                align-items: flex-start;
+            }
+
+            .menu.active {
+                display: flex;
             }
 
             .menu-toggle {
@@ -108,19 +130,19 @@
 </head>
 <body>
   <header>
-    <div class="logo">Zump Bot</div>
     <nav class="navbar">
-      <div class="menu-toggle" id="mobile-menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <ul class="menu" id="menu">
+      <div class="logo">Zump Bot</div>
+      <ul class="menu">
         <li><a href="#home">Início</a></li>
         <li><a href="#features">Recursos</a></li>
         <li><a href="#statistics">Estatísticas</a></li>
         <li><a href="https://discord.com/oauth2/authorize?client_id=1302728067789099139" class="btn">Adicionar Bot</a></li>
       </ul>
+      <div class="menu-toggle" id="mobile-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </nav>
   </header>
 
@@ -169,13 +191,12 @@
   </footer>
 
   <script>
-    const mobileMenu = document.getElementById('mobile-menu');
-    const menu = document.getElementById('menu');
+      const menuToggle = document.querySelector("#mobile-menu");
+      const menu = document.querySelector(".menu");
 
-    mobileMenu.addEventListener('click', () => {
-      menu.classList.toggle('active');
-      mobileMenu.classList.toggle('open');
-    });
+      menuToggle.addEventListener("click", () => {
+          menu.classList.toggle("active");
+      });
   </script>
 </body>
 </html>
