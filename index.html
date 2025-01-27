@@ -31,7 +31,7 @@
             border: 5px solid #fff;
             border-top: 5px solid #ffeb3b;
             border-radius: 50%;
-            animation: spin 5s linear infinite;
+            animation: spin 1s linear infinite;
         }
 
         @keyframes spin {
@@ -66,6 +66,17 @@
         .logo {
             font-size: 1.8rem;
             font-weight: bold;
+            text-shadow: 0 0 10px #00aaff, 0 0 20px #00aaff;
+            animation: glow 1.5s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #00aaff, 0 0 20px #00aaff, 0 0 30px #00aaff;
+            }
+            to {
+                text-shadow: 0 0 20px #00ccff, 0 0 40px #00ccff, 0 0 60px #00ccff;
+            }
         }
 
         nav {
@@ -175,8 +186,8 @@
             background: white;
             padding: 1.5rem;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.5s ease-in-out;
             width: 300px;
             text-align: center;
             animation: fadeUp 1s ease-in-out;
@@ -184,6 +195,7 @@
 
         .feature:hover {
             transform: translateY(-10px);
+            box-shadow: 0 0 20px #00aaff, 0 0 40px #00ccff;
         }
 
         .feature i {
@@ -215,10 +227,15 @@
             background: white;
             padding: 1.5rem;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.5s ease-in-out;
             text-align: center;
             width: 200px;
             animation: fadeIn 1s ease-in-out;
+        }
+
+        .stat:hover {
+            box-shadow: 0 0 20px #00aaff, 0 0 40px #00ccff;
         }
 
         .stat i {
