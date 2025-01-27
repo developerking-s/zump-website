@@ -243,6 +243,34 @@
             color: #4682b4;
             margin-bottom: 0.5rem;
         }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .action-buttons .btn {
+            background-color: #ffeb3b;
+            color: #333;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .action-buttons .btn:hover {
+            background-color: #ffc107;
+        }
+
+        .action-buttons .btn i {
+            font-size: 1.2rem;
+        }
     </style>
 </head>
 <body>
@@ -271,8 +299,18 @@
 
     <!-- Hero -->
     <section id="home" class="hero">
-        <h1>Bem-vindo ao Zump Bot!</h1>
+        <h1>Bem-vindo ao Site do Zump Bot!</h1>
         <p>Traga diversão e organização ao seu servidor com nosso bot completo!</p>
+
+        <!-- Botões de Ação -->
+        <div class="action-buttons">
+            <a href="https://discord.com/support" class="btn">
+                <i class="fas fa-life-ring"></i> Suporte
+            </a>
+            <a href="https://discord.com/oauth2/authorize?client_id=1302728067789099139" class="btn">
+                <i class="fas fa-plus-circle"></i> Adicionar
+            </a>
+        </div>
     </section>
 
     <!-- Features -->
