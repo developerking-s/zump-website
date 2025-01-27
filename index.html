@@ -21,7 +21,6 @@
             transition: background 0.3s, color 0.3s;
             background: #f0f8ff;
             color: #333;
-            overflow: hidden;
         }
 
         header {
@@ -31,6 +30,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         .logo {
