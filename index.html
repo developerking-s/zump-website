@@ -2,16 +2,95 @@
 <html lang="en">
 <head>
     <meta property="og:title" content="Website do Zump Bot">
-    <meta property="og:description" content="Olá, eu me chamo Zump, e tenho 15 aninhos!  Fui desenvolvido com o objetivo de trazer mais alegria e animação para o seu servidor!">
+    <meta property="og:description" content="Olá, eu me chamo Zump, e tenho 15 aninhos! Fui desenvolvido com o objetivo de trazer mais alegria e animação para o seu servidor!">
     <meta name="theme-color" content="#ffffff">
- <meta property="og:image" content="https://imgur.com/Nnmgjtz.png">
-<link rel="icon"href=l"https://imgur.com/Nnmgjtz.jpg" type="image/x-icon">
- <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
-<title>Zump Bot</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
+    <meta property="og:image" content="https://imgur.com/Nnmgjtz.png">
+    <link rel="icon" href="https://imgur.com/Nnmgjtz.jpg" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zump Bot</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <style>
+        /* Estilo geral */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            transition: background 0.3s, color 0.3s;
+        }
+        header {
+            background: #4682b4;
+            color: #fff;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .menu {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+        }
+        .menu a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .btn-toggle-theme {
+            padding: 0.5rem 1rem;
+            background: #5c9ead;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .btn-toggle-theme:hover {
+            background: #4682b4;
+        }
+        .hero {
+            background: url('https://imgur.com/Nnmgjtz.png') no-repeat center center / cover;
+            height: 60vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+        }
+        #features, #statistics {
+            padding: 2rem;
+        }
+        .features-grid, .statistics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        .feature-item, .stat-item {
+            padding: 1.5rem;
+            background: #f0f8ff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .feature-item:hover, .stat-item:hover {
+            transform: translateY(-5px);
+        }
+        .feature-item i, .stat-item i {
+            font-size: 2rem;
+            color: #4682b4;
+        }
+        footer {
+            background: #4682b4;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+        }
+    </style>
 </head>
 <body>
   <header>
@@ -20,49 +99,79 @@
       <ul class="menu">
         <li><a href="#home">Início</a></li>
         <li><a href="#features">Recursos</a></li>
-        <li><a href="#about">Sobre</a></li>
-        <li><a href="#contact">Contato</a></li>
-        <li><a href="https://discord.com/oauth2/authorize?client_id=1302728067789099139" class="btn">Convidar Bot</a></li>
+        <li><a href="#statistics">Estatísticas</a></li>
+        <li><a href="https://discord.com/oauth2/authorize?client_id=1302728067789099139" class="btn">Adicionar Bot</a></li>
+        <button class="btn-toggle-theme" id="theme-toggle">Alternar Tema</button>
       </ul>
-      <div class="menu-toggle" id="mobile-menu">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </div>
     </nav>
   </header>
 
   <section id="home" class="hero">
     <div class="hero-content">
-      <h1>Gerencie seu Discord com facilidade</h1>
-      <p>Um bot completo para ajudar sua comunidade a crescer!</p>
+      <h1>Bem-vindo ao Zump Bot!</h1>
+      <p>Traga diversão e organização ao seu servidor com nosso bot completo!</p>
       <a href="https://discord.com/oauth2/authorize?client_id=1302728067789099139" class="btn-primary">Adicione-Me</a>
     </div>
   </section>
 
   <section id="features">
-    <h2>Recursos do Bot</h2>
+    <h2>Recursos do Zump Bot</h2>
     <div class="features-grid">
-      <div class="feature-item">📜 Moderação Automática</div>
-      <div class="feature-item">🎵 Comandos de Diversão</div>
-      <div class="feature-item">📊 Uma Economia Global</div>
+      <div class="feature-item">
+        <i class="icon">🎵</i>
+        <p>Música para todos</p>
+      </div>
+      <div class="feature-item">
+        <i class="icon">📊</i>
+        <p>Economia Global</p>
+      </div>
+      <div class="feature-item">
+        <i class="icon">🎮</i>
+        <p>Jogos divertidos</p>
+      </div>
     </div>
   </section>
 
-  <section id="about">
-    <h2>Sobre o Zump</h2>
-    <p>Olá, eu me chamo Zump, e tenho 15 aninhos!  Fui desenvolvido com o objetivo de trazer mais alegria e animação para o seu servidor! 
-Minha missão é ajudar e divertir pessoas do mundo inteiro! Para isso, programei um bot que tem a minha determinação, é grandes sonhos... e ele mora aqui dentro de mim!</p>
-  </section>
-
-  <section id="contact">
-    <h2>Fale Conosco</h2>
-    <p>Entre em contato para suporte ou sugestões!</p>
-    <a href="https://discord.gg/rhxveR9s5A" class="btn-secondary">Servidor de Discord</a>
+  <section id="statistics">
+    <h2>Estatísticas do Bot</h2>
+    <div class="statistics-grid">
+      <div class="stat-item">
+        <i class="icon">🌐</i>
+        <p><strong>Servidores:</strong> 1,250</p>
+      </div>
+      <div class="stat-item">
+        <i class="icon">👥</i>
+        <p><strong>Usuários:</strong> 35,000+</p>
+      </div>
+    </div>
   </section>
 
   <footer>
     <p>© 2025 Zump Bot. Todos os direitos reservados.</p>
   </footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+    });
+
+    // Adiciona animação para alternar temas
+    document.body.style.transition = 'background 0.3s, color 0.3s';
+
+    // Estilo do modo escuro
+    const darkModeStyles = `
+      body.dark-mode {
+        background: #121212;
+        color: #e0e0e0;
+      }
+      body.dark-mode .feature-item, body.dark-mode .stat-item {
+        background: #1f1f1f;
+      }
+    `;
+    const styleSheet = document.createElement('style');
+    styleSheet.innerText = darkModeStyles;
+    document.head.appendChild(styleSheet);
+  </script>
 </body>
 </html>
