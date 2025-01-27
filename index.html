@@ -23,6 +23,7 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
+            flex-direction: column;
         }
 
         #preloader div {
@@ -41,6 +42,12 @@
             to {
                 transform: rotate(360deg);
             }
+        }
+
+        #loading-text {
+            color: white;
+            font-size: 1.2rem;
+            margin-top: 10px;
         }
 
         /* Estilo geral */
@@ -146,7 +153,6 @@
             background: #4682b4;
             color: white;
             padding: 4rem 2rem;
-            text-align: center;
         }
 
         .hero h1 {
@@ -156,19 +162,17 @@
         }
 
         .btn-primary {
-            background: white;
+            background: #ffeb3b;
             color: #333;
             padding: 0.5rem 1rem;
             text-decoration: none;
             font-weight: bold;
             border-radius: 5px;
             transition: background 0.3s;
-            border: 2px solid #4682b4;
         }
 
         .btn-primary:hover {
             background: #ffc107;
-            color: white;
         }
 
         footer {
@@ -255,7 +259,7 @@
         }
 
         .action-buttons .btn {
-            background-color: white;
+            background-color: #ffffff;
             color: #333;
             padding: 0.8rem 1.5rem;
             border-radius: 5px;
@@ -264,13 +268,11 @@
             gap: 0.5rem;
             text-decoration: none;
             font-weight: bold;
-            border: 2px solid #4682b4;
-            transition: background-color 0.3s, color 0.3s;
+            transition: background-color 0.3s;
         }
 
         .action-buttons .btn:hover {
-            background-color: #4682b4;
-            color: white;
+            background-color: #ffc107;
         }
 
         .action-buttons .btn i {
@@ -282,6 +284,7 @@
     <!-- Preloader -->
     <div id="preloader">
         <div></div>
+        <div id="loading-text">Carregando...</div>
     </div>
 
     <!-- Header -->
@@ -371,10 +374,8 @@
         // Preloader
         window.addEventListener('load', () => {
             const preloader = document.getElementById('preloader');
-            setTimeout(() => {
-                preloader.style.opacity = '0';
-                setTimeout(() => preloader.style.display = 'none', 500);
-            }, 5000);
+            preloader.style.opacity = '0';
+            setTimeout(() => preloader.style.display = 'none', 3000); // Esconde o preloader após 3 segundos
         });
 
         // Menu Responsivo
