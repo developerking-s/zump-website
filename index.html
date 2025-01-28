@@ -155,22 +155,10 @@
             padding: 4rem 2rem;
         }
 
-        /* Animação para o texto */
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-100%);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
         .hero h1 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
-            animation: slideIn 1.5s ease-out;
+            animation: fadeIn 1s ease-in-out;
         }
 
         .btn-primary {
@@ -184,7 +172,7 @@
         }
 
         .btn-primary:hover {
-            background: #0077b6;
+            background: #0077b6; /* Novo tom de azul mais escuro */
         }
 
         footer {
@@ -192,6 +180,103 @@
             padding: 1rem 0;
             background: #4682b4;
             color: white;
+        }
+
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .feature {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.5s ease-in-out;
+            width: 300px;
+            text-align: center;
+            animation: fadeUp 1s ease-in-out;
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 20px #00aaff, 0 0 40px #00ccff;
+        }
+
+        .feature i {
+            font-size: 2rem;
+            color: #4682b4;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .statistics {
+            margin-top: 3rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .stat {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.5s ease-in-out;
+            text-align: center;
+            width: 200px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .stat:hover {
+            box-shadow: 0 0 20px #00aaff, 0 0 40px #00ccff;
+        }
+
+        .stat i {
+            font-size: 2.5rem;
+            color: #4682b4;
+            margin-bottom: 0.5rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .action-buttons .btn {
+            background-color: #ffffff;
+            color: #333;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .action-buttons .btn:hover {
+            background-color: #ffc107;
+        }
+
+        .action-buttons .btn i {
+            font-size: 1.2rem;
         }
     </style>
 </head>
@@ -258,6 +343,28 @@
         </div>
     </section>
 
+    <!-- Statistics -->
+    <section id="stats">
+        <h2>Estatísticas</h2>
+        <div class="statistics">
+            <div class="stat">
+                <i class="fas fa-user-friends"></i>
+                <h3>500+</h3>
+                <p>Usuários ativos</p>
+            </div>
+            <div class="stat">
+                <i class="fas fa-server"></i>
+                <h3>50+</h3>
+                <p>Servidores</p>
+            </div>
+            <div class="stat">
+                <i class="fas fa-clock"></i>
+                <h3>99.9%</h3>
+                <p>Uptime</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer>
         <p>© 2025 Zump Bot. Todos os direitos reservados.</p>
@@ -268,7 +375,7 @@
         window.addEventListener('load', () => {
             const preloader = document.getElementById('preloader');
             preloader.style.opacity = '0';
-            setTimeout(() => preloader.style.display = 'none', 5000);
+            setTimeout(() => preloader.style.display = 'none', 5000); // Esconde o preloader após 5 segundos
         });
 
         // Menu Responsivo
