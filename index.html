@@ -1,65 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="Website do Zump Bot">
-    <meta property="og:description" content="Olá, eu me chamo Zump, e tenho 15 aninhos! Fui desenvolvido com o objetivo de trazer mais alegria e animação para o seu servidor!">
+    <meta property="og:title" content="Zump Website">
+    <meta property="og:description" content="Zump é um bot para trazer diversão e utilidades ao seu servidor!">
     <meta property="og:image" content="https://imgur.com/Nnmgjtz.png">
-    <meta name="theme-color" content="#ffffff">
-    <link rel="icon" href="https://imgur.com/Nnmgjtz.jpg" type="image/x-icon">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <meta name="theme-color" content="#4682b4">
+    <link rel="icon" href="https://imgur.com/Nnmgjtz.jpg">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <title>Zump Bot</title>
     <style>
-        /* Tela de carregamento */
-        #preloader {
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            overflow-x: hidden;
+            transition: background 0.5s, color 0.5s;
+            position: relative;
+            background: #1e3c72;
+        }
+
+        /* Fundo de bolinhas animado */
+        .background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #4682b4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            flex-direction: column;
+            z-index: -1;
+            overflow: hidden;
         }
 
-        #preloader div {
-            width: 50px;
-            height: 50px;
-            border: 5px solid #fff;
-            border-top: 5px solid #ffeb3b;
+        .background span {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 50%;
-            animation: spin 1s linear infinite;
+            animation: move 10s linear infinite;
         }
 
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
+        @keyframes move {
+            0% { transform: translateY(100vh); }
+            100% { transform: translateY(-10vh); }
         }
 
-        #loading-text {
-            color: white;
-            font-size: 1.2rem;
-            margin-top: 10px;
-        }
-
-        /* Estilo geral */
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(120deg, #f0f8ff, #b0c4de);
-            color: #333;
-        }
-
+        /* Header */
         header {
-            background: #4682b4;
+            background: rgba(30, 60, 114, 0.9);
             color: white;
             padding: 1rem 2rem;
             display: flex;
@@ -68,323 +57,214 @@
             position: sticky;
             top: 0;
             z-index: 1000;
+            backdrop-filter: blur(10px);
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            text-shadow: 0 0 10px #00aaff, 0 0 20px #00aaff;
-            animation: glow 1.5s infinite alternate;
-        }
-
-        @keyframes glow {
-            from {
-                text-shadow: 0 0 10px #00aaff, 0 0 20px #00aaff, 0 0 30px #00aaff;
-            }
-            to {
-                text-shadow: 0 0 20px #00ccff, 0 0 40px #00ccff, 0 0 60px #00ccff;
-            }
-        }
-
-        nav {
             display: flex;
             align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
         }
 
+        .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        nav { display: flex; align-items: center; }
         ul.menu {
             list-style: none;
             display: flex;
-            gap: 1.5rem;
-            margin: 0;
-            padding: 0;
+            gap: 1rem;
         }
 
         ul.menu li a {
             color: white;
             text-decoration: none;
             font-weight: bold;
+            font-size: 0.9rem;
             transition: color 0.3s;
         }
 
-        ul.menu li a:hover {
-            color: #ffeb3b;
-        }
+        ul.menu li a:hover { color: #ffeb3b; }
 
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
+        /* Botão de alternância de tema */
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
             cursor: pointer;
+            color: white;
+            margin-left: 10px;
         }
 
+        /* Menu responsivo */
+        .menu-toggle { display: none; cursor: pointer; }
         .menu-toggle span {
+            display: block;
+            width: 20px;
             height: 3px;
-            width: 25px;
+            margin: 4px;
             background: white;
         }
 
         @media (max-width: 768px) {
-            ul.menu {
+            ul.menu { 
                 display: none;
                 flex-direction: column;
-                background: #4682b4;
+                background: rgba(30, 60, 114, 0.9);
+                padding: 1rem;
                 position: absolute;
                 top: 60px;
                 right: 10px;
-                padding: 1rem;
                 border-radius: 5px;
             }
-
-            ul.menu.active {
-                display: flex;
-            }
-
-            .menu-toggle {
-                display: flex;
-            }
+            ul.menu.active { display: flex; }
+            .menu-toggle { display: block; }
         }
 
-        section {
-            text-align: center;
-            padding: 4rem 2rem;
-        }
-
+        /* Hero Section */
         .hero {
-            background: #4682b4;
+            text-align: center;
+            padding: 8rem 2rem;
+        }
+
+        .hero h1 { font-size: 3rem; }
+        .hero p { font-size: 1.5rem; margin-bottom: 2rem; }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: #0077b6;
             color: white;
-            padding: 4rem 2rem;
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        .btn-primary {
-            background: #ffeb3b;
-            color: #333;
-            padding: 0.5rem 1rem;
+            padding: 1rem 2rem;
             text-decoration: none;
             font-weight: bold;
             border-radius: 5px;
-            transition: background 0.3s;
-        }
-
-        .btn-primary:hover {
-            background: #0077b6; /* Novo tom de azul mais escuro */
-        }
-
-        footer {
-            text-align: center;
-            padding: 1rem 0;
-            background: #4682b4;
-            color: white;
-        }
-
-        .features {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2rem;
-        }
-
-        .feature {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.5s ease-in-out;
-            width: 300px;
-            text-align: center;
-            animation: fadeUp 1s ease-in-out;
-        }
-
-        .feature:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 0 20px #00aaff, 0 0 40px #00ccff;
-        }
-
-        .feature i {
-            font-size: 2rem;
-            color: #4682b4;
-            margin-bottom: 1rem;
-        }
-
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .statistics {
-            margin-top: 3rem;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2rem;
-        }
-
-        .stat {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.5s ease-in-out;
-            text-align: center;
-            width: 200px;
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        .stat:hover {
-            box-shadow: 0 0 20px #00aaff, 0 0 40px #00ccff;
-        }
-
-        .stat i {
-            font-size: 2.5rem;
-            color: #4682b4;
-            margin-bottom: 0.5rem;
-        }
-
-        .action-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .action-buttons .btn {
-            background-color: #ffffff;
-            color: #333;
-            padding: 0.8rem 1.5rem;
-            border-radius: 5px;
-            display: flex;
+            transition: background 0.3s, transform 0.3s;
+            display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.3s;
         }
 
-        .action-buttons .btn:hover {
-            background-color: #ffc107;
+        .btn:hover {
+            background: #005f8a;
+            transform: translateY(-5px);
         }
 
-        .action-buttons .btn i {
+        .btn i {
             font-size: 1.2rem;
         }
+
+        /* Modo escuro */
+        .dark-mode {
+            background: #111;
+            color: #fff;
+        }
+
+        .dark-mode .feature, .dark-mode .stat {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .dark-mode .theme-toggle { color: #000; }
+
+        /* Footer */
+        footer {
+            background: rgba(30, 60, 114, 0.9);
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover { text-decoration: underline; }
+
     </style>
 </head>
 <body>
-    <!-- Preloader -->
-    <div id="preloader">
-        <div></div>
-        <div id="loading-text">Carregando...</div>
-    </div>
+
+    <!-- Fundo animado -->
+    <div class="background"></div>
 
     <!-- Header -->
     <header>
-        <div class="logo">Zump Bot</div>
+        <div class="logo">
+            <img src="https://imgur.com/Nnmgjtz.png" alt="Zump Bot">
+            Zump Bot
+        </div>
         <nav>
-            <div class="menu-toggle" id="menu-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
             <ul class="menu" id="menu">
-                <li><a href="#home">Início</a></li>
                 <li><a href="#features">Recursos</a></li>
                 <li><a href="#stats">Estatísticas</a></li>
-                <li><a href="https://discord.com/oauth2/authorize?client_id=1302728067789099139" class="btn-primary">Adicionar Bot</a></li>
             </ul>
+            <button class="theme-toggle" id="theme-toggle">🌗</button>
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
         </nav>
     </header>
 
-    <!-- Hero -->
-    <section id="home" class="hero">
-        <h1>Bem-vindo ao Site do Zump Bot!</h1>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Bem-vindo(a) ao Zump Website</h1>
         <p>Traga diversão e organização ao seu servidor com nosso bot completo!</p>
-
-        <!-- Botões de Ação -->
-        <div class="action-buttons">
-            <a href="https://discord.com/support" class="btn">
-                <i class="fas fa-life-ring"></i> Suporte
-            </a>
-            <a href="https://discord.com/oauth2/authorize?client_id=1302728067789099139" class="btn">
-                <i class="fas fa-plus-circle"></i> Adicionar
-            </a>
-        </div>
-    </section>
-
-    <!-- Features -->
-    <section id="features">
-        <h2>Recursos</h2>
-        <div class="features">
-            <div class="feature">
-                <i class="fas fa-tools"></i>
-                <h3>Utilidades</h3>
-                <p>Comandos úteis para gerenciar seu servidor de forma eficiente.</p>
-            </div>
-            <div class="feature">
-                <i class="fas fa-laugh"></i>
-                <h3>Diversão</h3>
-                <p>Minigames e interações engraçadas para entreter os usuários.</p>
-            </div>
-            <div class="feature">
-                <i class="fas fa-coins"></i>
-                <h3>Economia</h3>
-                <p>Crie um sistema de moedas único e incentive a participação!</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Statistics -->
-    <section id="stats">
-        <h2>Estatísticas</h2>
-        <div class="statistics">
-            <div class="stat">
-                <i class="fas fa-user-friends"></i>
-                <h3>500+</h3>
-                <p>Usuários ativos</p>
-            </div>
-            <div class="stat">
-                <i class="fas fa-server"></i>
-                <h3>50+</h3>
-                <p>Servidores</p>
-            </div>
-            <div class="stat">
-                <i class="fas fa-clock"></i>
-                <h3>99.9%</h3>
-                <p>Uptime</p>
-            </div>
+        <div class="btn-container">
+            <a href="#" class="btn"><i class="fas fa-plus"></i>Adicionar</a>
+            <a href="#" class="btn"><i class="fas fa-headset"></i>Suporte</a>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>© 2025 Zump Bot. Todos os direitos reservados.</p>
+        <p>© 2025 Zump Bot</p>
+        <div class="footer-links">
+            <a href="#">Adicionar</a>
+            <a href="#">Top.gg</a>
+            <a href="#">Suporte</a>
+            <a href="#">Docs</a>
+            <a href="#">Termos</a>
+            <a href="#">Privacidade</a>
+        </div>
     </footer>
 
     <script>
-        // Preloader
-        window.addEventListener('load', () => {
-            const preloader = document.getElementById('preloader');
-            preloader.style.opacity = '0';
-            setTimeout(() => preloader.style.display = 'none', 5000); // Esconde o preloader após 5 segundos
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+            document.getElementById('menu').classList.toggle('active');
         });
 
-        // Menu Responsivo
-        const menuToggle = document.getElementById('menu-toggle');
-        const menu = document.getElementById('menu');
-
-        menuToggle.addEventListener('click', () => {
-            menu.classList.toggle('active');
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
         });
+
+        // Criar bolinhas animadas
+        const background = document.querySelector('.background');
+        for (let i = 0; i < 50; i++) {
+            const span = document.createElement('span');
+            span.style.left = `${Math.random() * 100}vw`;
+            span.style.animationDuration = `${Math.random() * 10 + 5}s`;
+            background.appendChild(span);
+        }
     </script>
+
 </body>
 </html>
