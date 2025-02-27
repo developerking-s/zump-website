@@ -164,17 +164,101 @@
             font-size: 1.2rem;
         }
 
-        /* Modo escuro */
-        .dark-mode {
-            background: #111;
+        /* Seção de Utilidades (Sem Embeds) */
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            padding: 4rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 2rem 0;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+            transition: transform 0.3s;
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature p {
+            font-size: 1rem;
+            color: #ddd;
+        }
+
+        /* Seção de Estatísticas (Com Embeds) */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            padding: 4rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 2rem 0;
+        }
+
+        .stat {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            width: 320px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 119, 182, 0.5);
+            position: relative;
+        }
+
+        .stat::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 119, 182, 0.4), transparent);
+            animation: pulse 5s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.2); opacity: 0.5; }
+            100% { transform: scale(1); opacity: 0.7; }
+        }
+
+        .stat i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #4682b4;
+        }
+
+        .stat h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
             color: #fff;
         }
 
-        .dark-mode .feature, .dark-mode .stat {
-            background: rgba(255, 255, 255, 0.1);
+        .stat p {
+            font-size: 1.2rem;
+            color: #ddd;
         }
-
-        .dark-mode .theme-toggle { color: #000; }
 
         /* Footer */
         footer {
@@ -198,7 +282,6 @@
         }
 
         .footer-links a:hover { text-decoration: underline; }
-
     </style>
 </head>
 <body>
@@ -209,6 +292,7 @@
     <!-- Header -->
     <header>
         <div class="logo">
+            <img src="https://imgur.com/Nnmgjtz.png" alt="Zump Bot">
             Zump Bot
         </div>
         <nav>
@@ -233,6 +317,44 @@
         </div>
     </section>
 
+    <!-- Seção de Utilidades (Sem Embeds) -->
+    <section class="features" id="features">
+        <div class="feature">
+            <i class="fas fa-tools"></i>
+            <h2>Utilidades</h2>
+            <p>Comandos úteis para moderar e organizar seu servidor.</p>
+        </div>
+        <div class="feature">
+            <i class="fas fa-gamepad"></i>
+            <h2>Diversão</h2>
+            <p>Jogos e comandos divertidos para entreter seus membros.</p>
+        </div>
+        <div class="feature">
+            <i class="fas fa-coins"></i>
+            <h2>Economia</h2>
+            <p>Sistema de economia com moedas virtuais e lojas.</p>
+        </div>
+    </section>
+
+    <!-- Seção de Estatísticas (Com Embeds) -->
+    <section class="stats" id="stats">
+        <div class="stat">
+            <i class="fas fa-server"></i>
+            <h2>Servidores</h2>
+            <p>500+</p>
+        </div>
+        <div class="stat">
+            <i class="fas fa-users"></i>
+            <h2>Usuários</h2>
+            <p>50.000+</p>
+        </div>
+        <div class="stat">
+            <i class="fas fa-clock"></i>
+            <h2>Uptime</h2>
+            <p>99.9%</p>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer>
         <p>© 2025 Zump Bot</p>
@@ -247,12 +369,29 @@
     </footer>
 
     <script>
-        document.getElementById('menu-toggle').addEventListener('click', () => {
-            document.getElementById('menu').classList.toggle('active');
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        const themes = ['default', 'dark-mode', 'light-mode'];
+        let currentThemeIndex = 0;
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.remove(themes[currentThemeIndex]);
+            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+            body.classList.add(themes[currentThemeIndex]);
+
+            if (themes[currentThemeIndex] === 'dark-mode') {
+                themeToggle.textContent = '🌙';
+            } else if (themes[currentThemeIndex] === 'light-mode') {
+                themeToggle.textContent = '☀️';
+            } else {
+                themeToggle.textContent = '🌗';
+            }
         });
 
-        document.getElementById('theme-toggle').addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
+        // Menu responsivo
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+            document.getElementById('menu').classList.toggle('active');
         });
 
         // Criar bolinhas animadas
