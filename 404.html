@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página não encontrada</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #0a192f;
+            color: #ffffff;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        h1 {
+            font-size: 3rem;
+            text-shadow: 0 0 10px #00bfff, 0 0 20px #008cff;
+            animation: glow 1.5s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #00bfff, 0 0 20px #008cff;
+            }
+            to {
+                text-shadow: 0 0 20px #00ffff, 0 0 30px #00bfff;
+            }
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-top: 10px;
+            opacity: 0.8;
+        }
+
+        .back-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: linear-gradient(45deg, #008cff, #00bfff);
+            border: none;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .back-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px #00bfff;
+        }
+
+        .spaceship {
+            font-size: 4rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="spaceship">🚀</div>
+    <h1>Erro 404 - Página não encontrada</h1>
+    <p>Oops! Parece que você se perdeu no espaço...</p>
+    <button class="back-button" onclick="goHome()">Voltar ao Início</button>
+
+    <script>
+        function goHome() {
+            window.location.href = "/";
+        }
+    </script>
+</body>
+</html>
