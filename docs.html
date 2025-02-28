@@ -1,1 +1,217 @@
-.
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentação do Bot</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        /* Cabeçalho */
+        header {
+            background: #0073e6;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 4px solid #005bb5;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Navegação */
+        nav {
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #0073e6;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #005bb5;
+        }
+
+        /* Conteúdo Principal */
+        main {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section {
+            margin-bottom: 40px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        section h2 {
+            font-size: 2rem;
+            color: #0073e6;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        section h2 i {
+            font-size: 1.5rem;
+        }
+
+        section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        section ul, section ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        section ul li, section ol li {
+            margin-bottom: 10px;
+        }
+
+        section code {
+            background: #f4f4f4;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #333;
+        }
+
+        /* Rodapé */
+        footer {
+            background: #0073e6;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            border-top: 4px solid #005bb5;
+        }
+
+        footer p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <h1>Documentação do Bot</h1>
+        <p>Guia completo para configurar e utilizar o bot de forma eficiente.</p>
+    </header>
+
+    <!-- Navegação -->
+    <nav>
+        <ul>
+            <li><a href="#introducao"><i class="fas fa-home"></i> Introdução</a></li>
+            <li><a href="#comandos"><i class="fas fa-terminal"></i> Comandos</a></li>
+            <li><a href="#configuracao"><i class="fas fa-cog"></i> Configuração</a></li>
+            <li><a href="#suporte"><i class="fas fa-life-ring"></i> Suporte</a></li>
+        </ul>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <main>
+        <!-- Introdução -->
+        <section id="introducao">
+            <h2><i class="fas fa-home"></i> Introdução</h2>
+            <p>Bem-vindo à documentação oficial do Bot. Este guia foi criado para ajudá-lo a configurar, utilizar e tirar o máximo proveito das funcionalidades do bot. Aqui você encontrará informações detalhadas sobre comandos, configurações e suporte.</p>
+            <p>O bot foi projetado para automatizar tarefas, melhorar a produtividade e fornecer suporte rápido e eficiente. Siga as instruções abaixo para começar.</p>
+        </section>
+
+        <!-- Comandos -->
+        <section id="comandos">
+            <h2><i class="fas fa-terminal"></i> Comandos</h2>
+            <p>Aqui estão os principais comandos disponíveis no bot:</p>
+            <ul>
+                <li><code>/start</code> - Inicia o bot e exibe as boas-vindas.</li>
+                <li><code>/help</code> - Mostra a lista de comandos disponíveis.</li>
+                <li><code>/config</code> - Permite configurar as opções do bot.</li>
+                <li><code>/info</code> - Exibe informações sobre o bot e sua versão.</li>
+                <li><code>/status</code> - Verifica o status atual do bot.</li>
+            </ul>
+        </section>
+
+        <!-- Configuração -->
+        <section id="configuracao">
+            <h2><i class="fas fa-cog"></i> Configuração</h2>
+            <p>Para configurar o bot, siga os passos abaixo:</p>
+            <ol>
+                <li>Acesse o painel de controle do bot.</li>
+                <li>Navegue até a seção de configurações.</li>
+                <li>Altere as opções conforme necessário, como idioma, notificações e permissões.</li>
+                <li>Salve as alterações e reinicie o bot para aplicar as novas configurações.</li>
+            </ol>
+            <p><strong>Dica:</strong> Consulte a seção de suporte caso encontre dificuldades durante a configuração.</p>
+        </section>
+
+        <!-- Suporte -->
+        <section id="suporte">
+            <h2><i class="fas fa-life-ring"></i> Suporte</h2>
+            <p>Se você precisar de ajuda, estamos à disposição para auxiliá-lo. Entre em contato conosco através dos seguintes canais:</p>
+            <ul>
+                <li><i class="fas fa-envelope"></i> <strong>Email:</strong> suporte@bot.com</li>
+                <li><i class="fas fa-comments"></i> <strong>Chat Online:</strong> Disponível 24/7 no nosso site.</li>
+            </ul>
+            <p>Nossa equipe de suporte está sempre pronta para ajudar com qualquer dúvida ou problema.</p>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2025 Zump Bot. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
