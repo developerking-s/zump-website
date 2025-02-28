@@ -1,600 +1,578 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="Zump Website">
-    <meta property="og:description" content="Zump é um bot para trazer diversão e utilidades ao seu servidor!">
-    <meta property="og:image" content="https://imgur.com/Nnmgjtz.png">
-    <meta name="theme-color" content="#4682b4">
-    <link rel="icon" href="https://imgur.com/Nnmgjtz.jpg">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <title>Zump Bot</title>
-    <style>
-        /* Reset e configurações globais */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            color: #333;
-            overflow-x: hidden;
-            background: #f0f2f5;
-            transition: background 0.5s, color 0.5s;
-        }
-
-        /* Modo Escuro */
-        body.dark-mode {
-            background: #1a1a1a;
-            color: #f0f0f0;
-        }
-
-        body.dark-mode header,
-        body.dark-mode footer {
-            background: rgba(0, 0, 0, 0.9);
-            color: #f0f0f0;
-        }
-
-        body.dark-mode .feature,
-        body.dark-mode .stat {
-            background: #2a2a2a;
-            color: #f0f0f0;
-        }
-
-        body.dark-mode .btn {
-            background: #0077b6;
-            color: #f0f0f0;
-        }
-
-        body.dark-mode .btn:hover {
-            background: #005f8a;
-        }
-
-        body.dark-mode .footer-links a {
-            color: #f0f0f0;
-        }
-
-        /* Fundo de bolinhas animado */
-        .background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .background span {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: rgba(0, 119, 182, 0.1);
-            border-radius: 50%;
-            animation: move 10s linear infinite;
-        }
-
-        @keyframes move {
-            0% { transform: translateY(100vh); }
-            100% { transform: translateY(-10vh); }
-        }
-
-        /* Header */
-        header {
-            background: rgba(255, 255, 255, 0.9);
-            color: #333;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #0077b6;
-        }
-
-        .logo img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-
-        nav {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        ul.menu {
-            list-style: none;
-            display: flex;
-            gap: 1rem;
-        }
-
-        ul.menu li a {
-            color: #333;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.9rem;
-            transition: color 0.3s;
-        }
-
-        ul.menu li a:hover {
-            color: #0077b6;
-        }
-
-        /* Botão de alternância de tema */
-        .theme-toggle,
-        .audio-toggle {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #333;
-            margin-left: 10px;
-        }
-
-        body.dark-mode .theme-toggle,
-        body.dark-mode .audio-toggle {
-            color: #f0f0f0;
-        }
-
-        /* Botão de Login */
-        .login-btn {
-            background: #0077b6;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
-
-        .login-btn:hover {
-            background: #005f8a;
-        }
-
-        .login-btn i {
-            font-size: 1.2rem;
-        }
-
-        /* Menu responsivo */
-        .menu-toggle {
-            display: none;
-            cursor: pointer;
-        }
-
-        .menu-toggle span {
-            display: block;
-            width: 20px;
-            height: 3px;
-            margin: 4px;
-            background: #333;
-        }
-
-        @media (max-width: 768px) {
-            ul.menu {
-                display: none;
-                flex-direction: column;
-                background: rgba(255, 255, 255, 0.9);
-                padding: 1rem;
-                position: absolute;
-                top: 60px;
-                right: 10px;
-                border-radius: 5px;
-                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            }
-            ul.menu.active {
-                display: flex;
-            }
-            .menu-toggle {
-                display: block;
-            }
-        }
-
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 8rem 2rem;
-            color: #333;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            animation: slideInLeft 1s ease-out;
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            animation: fadeIn 2s ease-out;
-        }
-
-        @keyframes slideInLeft {
-            0% {
-                transform: translateX(-100%);
-                opacity: 0;
-            }
-            100% {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
-
-        .btn-container {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            background: #0077b6;
-            color: white;
-            padding: 1rem 2rem;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 5px;
-            transition: background 0.3s, transform 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn:hover {
-            background: #005f8a;
-            transform: translateY(-5px);
-        }
-
-        .btn i {
-            font-size: 1.2rem;
-        }
-
-        /* Seção de Utilidades */
-        .features {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            padding: 4rem 2rem;
-            background: white;
-            margin: 2rem 0;
-        }
-
-        .feature {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            text-align: center;
-            width: 300px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .feature:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .feature i {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: #0077b6;
-        }
-
-        .feature h2 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #333;
-        }
-
-        .feature p {
-            font-size: 1rem;
-            color: #666;
-        }
-
-        /* Seção de Estatísticas */
-        .stats {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            padding: 4rem 2rem;
-            background: white;
-            margin: 2rem 0;
-        }
-
-        .stat {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            width: 320px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            position: relative;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .stat:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .stat i {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: #0077b6;
-        }
-
-        .stat h2 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #333;
-        }
-
-        .stat p {
-            font-size: 1.2rem;
-            color: #666;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s forwards;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Footer */
-        footer {
-            background: rgba(255, 255, 255, 0.9);
-            color: #333;
-            text-align: center;
-            padding: 3rem 0;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 1rem;
-        }
-
-        .footer-links a {
-            color: #333;
-            text-decoration: none;
-        }
-
-        .footer-links a:hover {
-            text-decoration: underline;
-        }
-    </style>
-</head>
-<body>
-    <!-- Fundo animado -->
-    <div class="background"></div>
-
-    <!-- Header -->
-    <header>
-        <div class="logo">
-            Zump Bot
-        </div>
-        <nav>
-            <ul class="menu" id="menu">
-                <li><a href="#features">Recursos</a></li>
-                <li><a href="#stats">Estatísticas</a></li>
-            </ul>
-            <a hr
-            <button class="theme-toggle" id="theme-toggle">🌗</button>
-            <button class="audio-toggle" id="audio-toggle">
-                <i class="fas fa-volume-up"></i>
-            </button>
-            <div class="menu-toggle" id="menu-toggle">
-                <span></span><span></span><span></span>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <h1>Website do Zump Beyond</h1>
-        <p>Traga diversão e organização ao seu servidor com nosso bot completo!</p>
-        <div class="btn-container">
-            <a href="#" class="btn"><i class="fas fa-plus"></i>Adicionar</a>
-            <a href="#" class="btn"><i class="fas fa-headset"></i>Suporte</a>
-        </div>
-    </section>
-
-    <!-- Seção de Utilidades -->
-    <section class="features" id="features">
-        <div class="feature">
-            <i class="fas fa-tools"></i>
-            <h2>Utilidades</h2>
-            <p>Comandos úteis para moderar e organizar seu servidor.</p>
-        </div>
-        <div class="feature">
-            <i class="fas fa-gamepad"></i>
-            <h2>Diversão</h2>
-            <p>Jogos e comandos divertidos para entreter seus membros.</p>
-        </div>
-        <div class="feature">
-            <i class="fas fa-coins"></i>
-            <h2>Economia</h2>
-            <p>Sistema de economia com moedas virtuais e lojas.</p>
-        </div>
-    </section>
-
-    <!-- Seção de Estatísticas -->
-    <section class="stats" id="stats">
-        <div class="stat">
-            <i class="fas fa-server"></i>
-            <h2>Servidores</h2>
-            <p class="stat-number">050+</p>
-        </div>
-        <div class="stat">
-            <i class="fas fa-users"></i>
-            <h2>Usuários</h2>
-            <p class="stat-number">020000+</p>
-        </div>
-        <div class="stat">
-            <i class="fas fa-clock"></i>
-            <h2>Uptime</h2>
-            <p class="stat-number">99.9%</p>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>© 2025 Zump Bot</p>
-        <div class="footer-links">
-            <a href="#">Adicionar</a>
-            <a href="https://top.gg">Top.gg</a>
-            <a href="#">Suporte</a>
-            <a href="https://zump-website.netlify.app/docs.html">Docs</a>
-            <a href="https://zump-website.netlify.app/termos.html">Termos</a>
-            <a href="#">Privacidade</a>
-        </div>
-    </footer>
-
-    <!-- Player de Áudio do YouTube (invisível) -->
-    <div id="player"></div>
-
-    <script>
-        // Carregar a API do YouTube IFrame Player
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        var player;
-        var isPlaying = false;
-
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: '0',
-                width: '0',
-                videoId: 'dQw4w9WgXcQ', // Substitua pelo ID do vídeo do YouTube
-                playerVars: {
-                    'autoplay': 0,
-                    'controls': 0,
-                    'disablekb': 1,
-                    'enablejsapi': 1,
-                    'fs': 0,
-                    'iv_load_policy': 3,
-                    'modestbranding': 1,
-                    'playsinline': 1,
-                    'rel': 0,
-                    'showinfo': 0
-                },
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
-                }
-            });
-        }
-
-        function onPlayerReady(event) {
-            // O player está pronto
-        }
-
-        function onPlayerStateChange(event) {
-            if (event.data === YT.PlayerState.PLAYING) {
-                isPlaying = true;
-            } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
-                isPlaying = false;
-            }
-        }
-
-        // Controle de áudio
-        const audioToggle = document.getElementById('audio-toggle');
-        audioToggle.addEventListener('click', () => {
-            if (isPlaying) {
-                player.pauseVideo();
-                audioToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
-            } else {
-                player.playVideo();
-                audioToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
-            }
-        });
-
-        // Alternância de tema
-        const themeToggle = document.getElementById('theme-toggle');
-        const body = document.body;
-
-        themeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-            if (body.classList.contains('dark-mode')) {
-                themeToggle.textContent = '☀️';
-            } else {
-                themeToggle.textContent = '🌙';
-            }
-        });
-
-        // Menu responsivo
-        document.getElementById('menu-toggle').addEventListener('click', () => {
-            document.getElementById('menu').classList.toggle('active');
-        });
-
-        // Criar bolinhas animadas
-        const background = document.querySelector('.background');
-        for (let i = 0; i < 50; i++) {
-            const span = document.createElement('span');
-            span.style.left = `${Math.random() * 100}vw`;
-            span.style.animationDuration = `${Math.random() * 10 + 5}s`;
-            background.appendChild(span);
-        }
-
-        // Animação dos números
-        const statNumbers = document.querySelectorAll('.stat-number');
-        statNumbers.forEach((number) => {
-            const target = +number.innerText.replace('+', '');
-            let count = 0;
-            const increment = target / 100;
-
-            const updateNumber = () => {
-                if (count < target) {
-                    count += increment;
-                    number.innerText = Math.ceil(count) + (number.innerText.includes('+') ? '+' : '');
-                    requestAnimationFrame(updateNumber);
-                } else {
-                    number.innerText = target + (number.innerText.includes('+') ? '+' : '');
-                }
-            };
-
-            updateNumber();
-        });
-    </script>
-</body>
+  <!DOCTYPE html>  
+<html lang="pt-BR">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <meta property="og:title" content="Zump Website">  
+    <meta property="og:description" content="Zump é um bot para trazer diversão e utilidades ao seu servidor!">  
+    <meta property="og:image" content="https://imgur.com/Nnmgjtz.png">  
+    <meta name="theme-color" content="#4682b4">  
+    <link rel="icon" href="https://imgur.com/Nnmgjtz.jpg">  
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">  
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">  
+    <title>Zump Bot</title>  
+    <style>  
+        /* Reset e configurações globais */  
+        * {  
+            margin: 0;  
+            padding: 0;  
+            box-sizing: border-box;  
+        }  
+        body {  
+            font-family: 'Poppins', sans-serif;  
+            color: #333;  
+            overflow-x: hidden;  
+            background: #f0f2f5;  
+            transition: background 0.5s, color 0.5s;  
+        }  
+
+        /* Modo Escuro */  
+        body.dark-mode {  
+            background: #1a1a1a;  
+            color: #f0f0f0;  
+        }  
+
+        body.dark-mode header,  
+        body.dark-mode footer {  
+            background: rgba(0, 0, 0, 0.9);  
+            color: #f0f0f0;  
+        }  
+
+        body.dark-mode .feature,  
+        body.dark-mode .stat {  
+            background: #2a2a2a;  
+            color: #f0f0f0;  
+        }  
+
+        body.dark-mode .btn {  
+            background: #0077b6;  
+            color: #f0f0f0;  
+        }  
+
+        body.dark-mode .btn:hover {  
+            background: #005f8a;  
+        }  
+
+        body.dark-mode .footer-links a {  
+            color: #f0f0f0;  
+        }  
+
+        /* Fundo de bolinhas animado */  
+        .background {  
+            position: fixed;  
+            top: 0;  
+            left: 0;  
+            width: 100%;  
+            height: 100%;  
+            z-index: -1;  
+            overflow: hidden;  
+        }  
+
+        .background span {  
+            position: absolute;  
+            width: 10px;  
+            height: 10px;  
+            background: rgba(0, 119, 182, 0.1);  
+            border-radius: 50%;  
+            animation: move 10s linear infinite;  
+        }  
+
+        @keyframes move {  
+            0% { transform: translateY(100vh); }  
+            100% { transform: translateY(-10vh); }  
+        }  
+
+        /* Header */  
+        header {  
+            background: rgba(255, 255, 255, 0.9);  
+            color: #333;  
+            padding: 1rem 2rem;  
+            display: flex;  
+            justify-content: space-between;  
+            align-items: center;  
+            position: sticky;  
+            top: 0;  
+            z-index: 1000;  
+            backdrop-filter: blur(10px);  
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);  
+        }  
+
+        .logo {  
+            display: flex;  
+            align-items: center;  
+            font-size: 1.5rem;  
+            font-weight: bold;  
+            color: #0077b6;  
+        }  
+
+        .logo img {  
+            width: 40px;  
+            height: 40px;  
+            border-radius: 50%;  
+            margin-right: 10px;  
+        }  
+
+        nav {  
+            display: flex;  
+            align-items: center;  
+            gap: 1rem;  
+        }  
+
+        ul.menu {  
+            list-style: none;  
+            display: flex;  
+            gap: 1rem;  
+        }  
+
+        ul.menu li a {  
+            color: #333;  
+            text-decoration: none;  
+            font-weight: bold;  
+            font-size: 0.9rem;  
+            transition: color 0.3s;  
+        }  
+
+        ul.menu li a:hover {  
+            color: #0077b6;  
+        }  
+
+        /* Botão de alternância de tema */  
+        .theme-toggle,  
+        .audio-toggle {  
+            background: none;  
+            border: none;  
+            font-size: 1.5rem;  
+            cursor: pointer;  
+            color: #333;  
+            margin-left: 10px;  
+        }  
+
+        body.dark-mode .theme-toggle,  
+        body.dark-mode .audio-toggle {  
+            color: #f0f0f0;  
+        }  
+
+        /* Menu responsivo */  
+        .menu-toggle {  
+            display: none;  
+            cursor: pointer;  
+        }  
+
+        .menu-toggle span {  
+            display: block;  
+            width: 20px;  
+            height: 3px;  
+            margin: 4px;  
+            background: #333;  
+        }  
+
+        @media (max-width: 768px) {  
+            ul.menu {  
+                display: none;  
+                flex-direction: column;  
+                background: rgba(255, 255, 255, 0.9);  
+                padding: 1rem;  
+                position: absolute;  
+                top: 60px;  
+                right: 10px;  
+                border-radius: 5px;  
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);  
+            }  
+            ul.menu.active {  
+                display: flex;  
+            }  
+            .menu-toggle {  
+                display: block;  
+            }  
+        }  
+
+        /* Hero Section */  
+        .hero {  
+            text-align: center;  
+            padding: 8rem 2rem;  
+            color: #333;  
+            }  
+
+        .hero h1 {  
+            font-size: 3rem;  
+            font-weight: 700;  
+            animation: slideInLeft 1s ease-out;  
+        }  
+
+        .hero p {  
+            font-size: 1.5rem;  
+            margin-bottom: 2rem;  
+            animation: fadeIn 2s ease-out;  
+        }  
+
+        @keyframes slideInLeft {  
+            0% {  
+                transform: translateX(-100%);  
+                opacity: 0;  
+            }  
+            100% {  
+                transform: translateX(0);  
+                opacity: 1;  
+            }  
+        }  
+
+        @keyframes fadeIn {  
+            0% {  
+                opacity: 0;  
+            }  
+            100% {  
+                opacity: 1;  
+            }  
+        }  
+
+        .btn-container {  
+            display: flex;  
+            justify-content: center;  
+            gap: 1rem;  
+            flex-wrap: wrap;  
+        }  
+
+        .btn {  
+            background: #0077b6;  
+            color: white;  
+            padding: 1rem 2rem;  
+            text-decoration: none;  
+            font-weight: bold;  
+            border-radius: 5px;  
+            transition: background 0.3s, transform 0.3s;  
+            display: inline-flex;  
+            align-items: center;  
+            gap: 0.5rem;  
+        }  
+
+        .btn:hover {  
+            background: #005f8a;  
+            transform: translateY(-5px);  
+        }  
+
+        .btn i {  
+            font-size: 1.2rem;  
+        }  
+
+        /* Seção de Utilidades */  
+        .features {  
+            display: flex;  
+            justify-content: center;  
+            gap: 2rem;  
+            flex-wrap: wrap;  
+            padding: 4rem 2rem;  
+            background: white;  
+            margin: 2rem 0;  
+        }  
+
+        .feature {  
+            background: white;  
+            padding: 2rem;  
+            border-radius: 10px;  
+            text-align: center;  
+            width: 300px;  
+            transition: transform 0.3s, box-shadow 0.3s;  
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
+        }  
+
+        .feature:hover {  
+            transform: translateY(-10px);  
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);  
+        }  
+
+        .feature i {  
+            font-size: 3rem;  
+            margin-bottom: 1rem;  
+            color: #0077b6;  
+        }  
+
+        .feature h2 {  
+            font-size: 1.5rem;  
+            margin-bottom: 1rem;  
+            color: #333;  
+        }  
+
+        .feature p {  
+            font-size: 1rem;  
+            color: #666;  
+        }  
+
+        /* Seção de Estatísticas */  
+        .stats {  
+            display: flex;  
+            justify-content: center;  
+            gap: 2rem;  
+            flex-wrap: wrap;  
+            padding: 4rem 2rem;  
+            background: white;  
+            margin: 2rem 0;  
+        }  
+
+        .stat {  
+            background: white;  
+            padding: 2rem;  
+            border-radius: 15px;  
+            text-align: center;  
+            width: 320px;  
+            overflow: hidden;  
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
+            position: relative;  
+            transition: transform 0.3s, box-shadow 0.3s;  
+        }  
+
+        .stat:hover {  
+            transform: translateY(-10px);  
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);  
+        }  
+
+        .stat i {  
+            font-size: 3rem;  
+            margin-bottom: 1rem;  
+            color: #0077b6;  
+        }  
+
+        .stat h2 {  
+            font-size: 1.5rem;  
+            margin-bottom: 1rem;  
+            color: #333;  
+        }  
+
+        .stat p {  
+            font-size: 1.2rem;  
+            color: #666;  
+            opacity: 0;  
+            transform: translateY(20px);  
+            animation: fadeInUp 1s forwards;  
+        }  
+
+        @keyframes fadeInUp {  
+            to {  
+                opacity: 1;  
+                transform: translateY(0);  
+            }  
+        }  
+
+        /* Footer */  
+        footer {  
+            background: rgba(255, 255, 255, 0.9);  
+            color: #333;  
+            text-align: center;  
+            padding: 3rem 0;  
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);  
+        }  
+
+        .footer-links {  
+            display: flex;  
+            justify-content: center;  
+            gap: 1rem;  
+            flex-wrap: wrap;  
+            margin-top: 1rem;  
+        }  
+
+        .footer-links a {  
+            color: #333;  
+            text-decoration: none;  
+        }  
+
+        .footer-links a:hover {  
+            text-decoration: underline;  
+        }  
+    </style>  
+</head>  
+<body>  
+    <!-- Fundo animado -->  
+    <div class="background"></div>  
+
+    <!-- Header -->  
+    <header>  
+        <div class="logo">  
+            Zump Bot  
+        </div>  
+        <nav>  
+            <ul class="menu" id="menu">  
+                <li><a href="#features">Recursos</a></li>  
+                <li><a href="#stats">Estatísticas</a></li>  
+                <li><a href="https://zump-website.netlify.app/docs.html">Comandos</a></li>  
+                <li><a href="https://zump-website.netlify.app/docs.html">Docs</a></li>  
+            </ul>  
+            <button class="theme-toggle" id="theme-toggle">🌗</button>  
+            <button class="audio-toggle" id="audio-toggle">  
+                <i class="fas fa-volume-up"></i>  
+            </button>  
+            <div class="menu-toggle" id="menu-toggle">  
+                <span></span><span></span><span></span>  
+            </div>  
+        </nav>  
+    </header>  
+
+    <!-- Hero Section -->  
+    <section class="hero">  
+        <h1>Website do Zump Beyond</h1>  
+        <p>Traga diversão e organização ao seu servidor com nosso bot completo!</p>  
+        <div class="btn-container">  
+            <a href="#" class="btn"><i class="fas fa-plus"></i>Adicionar</a>  
+            <a href="#" class="btn"><i class="fas fa-headset"></i>Suporte</a>  
+        </div>  
+    </section>  
+
+    <!-- Seção de Utilidades -->  
+    <section class="features" id="features">  
+        <div class="feature">  
+            <i class="fas fa-tools"></i>  
+            <h2>Utilidades</h2>  
+            <p>Comandos úteis para moderar e organizar seu servidor.</p>  
+        </div>  
+        <div class="feature">  
+            <i class="fas fa-gamepad"></i>  
+            <h2>Diversão</h2>  
+            <p>Jogos e comandos divertidos para entreter seus membros.</p>  
+        </div>  
+        <div class="feature">  
+            <i class="fas fa-coins"></i>  
+            <h2>Economia</h2>  
+            <p>Sistema de economia com moedas virtuais e lojas.</p>  
+        </div>  
+    </section>  
+
+    <!-- Seção de Estatísticas -->  
+    <section class="stats" id="stats">  
+        <div class="stat">  
+            <i class="fas fa-server"></i>  
+            <h2>Servidores</h2>  
+            <p class="stat-number">050+</p>  
+        </div>  
+        <div class="stat">  
+            <i class="fas fa-users"></i>  
+            <h2>Usuários</h2>  
+            <p class="stat-number">020000+</p>  
+        </div>  
+        <div class="stat">  
+            <i class="fas fa-clock"></i>  
+            <h2>Uptime</h2>  
+            <p class="stat-number">99.9%</p>  
+        </div>  
+    </section>  
+
+    <!-- Footer -->  
+    <footer>  
+        <p>© 2025 Zump Bot</p>  
+        <div class="footer-links">  
+            <a href="#">Adicionar</a>  
+            <a href="https://top.gg">Top.gg</a>  
+            <a href="#">Suporte</a>  
+            <a href="https://zump-website.netlify.app/docs.html">Docs</a>  
+            <a href="https://zump-website.netlify.app/termos.html">Termos</a>  
+            <a href="#">Privacidade</a>  
+        </div>  
+    </footer>  
+
+    <!-- Player de Áudio do YouTube (invisível) -->  
+    <div id="player"></div>  
+
+    <script>  
+        // Carregar a API do YouTube IFrame Player  
+        var tag = document.createElement('script');  
+        tag.src = "https://www.youtube.com/iframe_api";  
+        var firstScriptTag = document.getElementsByTagName('script')[0];  
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);  
+
+        var player;  
+        var isPlaying = false;  
+
+        function onYouTubeIframeAPIReady() {  
+            player = new YT.Player('player', {  
+                height: '0',  
+                width: '0',  
+                videoId: 'qq-RGFyaq0U', // Substitua pelo ID do vídeo do YouTube  
+                playerVars: {  
+                    'autoplay': 0,  
+                    'controls': 0,  
+                    'disablekb': 1,  
+                    'enablejsapi': 1,  
+                    'fs': 0,  
+                    'iv_load_policy': 3,  
+                    'modestbranding': 1,  
+                    'playsinline': 1,  
+                    'rel': 0,  
+                    'showinfo': 0  
+                },  
+                events: {  
+                    'onReady': onPlayerReady,  
+                    'onStateChange': onPlayerStateChange  
+                }  
+            });  
+        }  
+
+        function onPlayerReady(event) {  
+            // O player está pronto  
+        }  
+
+        function onPlayerStateChange(event) {  
+            if (event.data === YT.PlayerState.PLAYING) {  
+                isPlaying = true;  
+            } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {  
+                isPlaying = false;  
+            }  
+        }  
+
+        // Controle de áudio  
+        const audioToggle = document.getElementById('audio-toggle');  
+        audioToggle.addEventListener('click', () => {  
+            if (isPlaying) {  
+                player.pauseVideo();  
+                audioToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';  
+            } else {  
+                player.playVideo();  
+                audioToggle.innerHTML = '<i class="fas fa-volume-up"></i>';  
+            }  
+        });  
+
+        // Alternância de tema  
+        const themeToggle = document.getElementById('theme-toggle');  
+        const body = document.body;  
+
+        themeToggle.addEventListener('click', () => {  
+            body.classList.toggle('dark-mode');  
+            if (body.classList.contains('dark-mode')) {  
+                themeToggle.textContent = '☀️';  
+            } else {  
+                themeToggle.textContent = '🌙';  
+            }  
+        });  
+
+        // Menu responsivo  
+        document.getElementById('menu-toggle').addEventListener('click', () => {  
+            document.getElementById('menu').classList.toggle('active');  
+        });  
+
+        // Criar bolinhas animadas  
+        const background = document.querySelector('.background');  
+        for (let i = 0; i < 50; i++) {  
+            const span = document.createElement('span');  
+            span.style.left = `${Math.random() * 100}vw`;  
+            span.style.animationDuration = `${Math.random() * 10 + 5}s`;  
+            background.appendChild(span);  
+        }  
+
+        // Animação dos números  
+        const statNumbers = document.querySelectorAll('.stat-number');  
+        statNumbers.forEach((number) => {  
+            const target = +number.innerText.replace('+', '');  
+            let count = 0;  
+            const increment = target / 100;  
+
+            const updateNumber = () => {  
+                if (count < target) {  
+                    count += increment;  
+                    number.innerText = Math.ceil(count) + (number.innerText.includes('+') ? '+' : '');  
+                    requestAnimationFrame(updateNumber);  
+            } else {  
+                number.innerText = target + (number.innerText.includes('+') ? '+' : '');  
+            }  
+        };  
+
+        updateNumber();  
+    });  
+</script>  
+</body>  
 </html>
