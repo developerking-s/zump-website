@@ -1,1 +1,256 @@
-.
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta property="og:title" content="Termos do Zump">
+    <meta property="og:description" content="Veja mais sobre os termos de uso e privacidade e o que não pode fazer e o que pode fazer e as consequências">
+    <meta property="og:image" content="https://imgur.com/Nnmgjtz.png">
+    <meta name="theme-color" content="#4682b4">
+    <link rel="icon" href="https://imgur.com/Nnmgjtz.jpg">  
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termos do Zump</title>
+    <style>
+        /* Estilos gerais */
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.dark-mode {
+            background-color: #1e1e1e;
+            color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        body.dark-mode .container {
+            background: #2c2c2c;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            transition: color 0.3s;
+        }
+
+        body.dark-mode h1 {
+            color: #f9f9f9;
+        }
+
+        h2 {
+            color: #34495e;
+            font-size: 1.8em;
+            margin-top: 30px;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+
+        body.dark-mode h2 {
+            color: #f9f9f9;
+        }
+
+        p {
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            color: #e74c3c;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        body.dark-mode .highlight {
+            color: #ff6b6b;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #777;
+            transition: color 0.3s;
+        }
+
+        body.dark-mode .footer {
+            color: #aaa;
+        }
+
+        .footer a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        body.dark-mode .footer a {
+            color: #1abc9c;
+        }
+
+        /* Menu de navegação */
+        .menu {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .menu button {
+            background: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+
+        .menu button:hover {
+            background: #2980b9;
+        }
+
+        body.dark-mode .menu button {
+            background: #1abc9c;
+        }
+
+        body.dark-mode .menu button:hover {
+            background: #16a085;
+        }
+
+        /* Botão de voltar ao topo */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2em;
+            display: none;
+            transition: background-color 0.3s;
+        }
+
+        .back-to-top:hover {
+            background: #2980b9;
+        }
+
+        body.dark-mode .back-to-top {
+            background: #1abc9c;
+        }
+
+        body.dark-mode .back-to-top:hover {
+            background: #16a085;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+
+            .menu {
+                top: 10px;
+                right: 10px;
+            }
+
+            .menu button {
+                padding: 8px 12px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu de navegação -->
+    <div class="menu">
+        <button id="theme-toggle">🌙</button>
+        <button onclick="scrollToTop()">⬆️ Voltar ao Início</button>
+    </div>
+
+    <!-- Conteúdo principal -->
+    <div class="container">
+        <h1>Termos de Uso do Zump Beyond</h1>
+        <p>O sonho do Zump Beyond é proporcionar uma experiência divertida e útil dentro do Discord, ajudando as comunidades a crescerem e se organizarem. Para que isso aconteça, existem diretrizes que precisam ser seguidas. Apenas aqueles que respeitam essas diretrizes podem aproveitar o Zump Beyond sem problemas.</p>
+        <p>Aqui estão as regras de uso do Zump Beyond, mas lembre-se: você pode ser punido por algo que não está listado aqui. Use o bom senso!</p>
+
+        <h2>🚫 Ações que não serão toleradas</h2>
+        <ul>
+            <li><span class="highlight">Não respeitar as diretrizes do Discord</span> – O Zump Beyond segue as Diretrizes da Comunidade e os Termos de Serviço do Discord. Se você violá-los, poderá ser banido do bot.</li>
+            <li><span class="highlight">Usar o Zump Beyond para atividades NSFW ou ilegais</span> – O bot não é um espaço para conteúdos adultos, golpes ou qualquer atividade ilícita.</li>
+            <li><span class="highlight">Tentar obter vantagens explorando bugs ou restrições</span> – Criar várias contas para obter recompensas, usar terceiros para isso ou abusar de falhas do bot resultará em punição.</li>
+            <li><span class="highlight">Comercializar vantagens ou recursos do Zump Beyond</span> – Vender, alugar ou trocar qualquer funcionalidade do bot por dinheiro real, Discord Nitro, gift cards ou qualquer item com valor monetário é proibido. Isso inclui apenas anunciar ou brincar sobre a venda. Se alguém oferecer algo, denuncie.</li>
+            <li><span class="highlight">Tentar evadir punições</span> – Se você for banido do Zump Beyond e criar outra conta para usá-lo novamente, será banido permanentemente.</li>
+            <li><span class="highlight">Atacar, prejudicar ou tentar derrubar o Zump Beyond</span> – Qualquer tentativa de interromper o funcionamento do bot será tratada com rigor.</li>
+            <li><span class="highlight">Plagiar o Zump Beyond</span> – Se inspirar é normal, mas copiar o bot descaradamente não será aceito.</li>
+            <li><span class="highlight">Solicitar reembolso de compras indevidamente</span> – Se adquirir algo relacionado ao bot, entre em contato com o suporte antes de pedir reembolso sem justificativa válida, pois isso pode resultar em punição.</li>
+            <li><span class="highlight">Se passar pelo Zump Beyond ou sua equipe</span> – Criar bots com o mesmo nome/avatar, espalhar informações falsas ou alegar vínculo oficial sem autorização é proibido.</li>
+            <li><span class="highlight">Ofender, xingar ou desrespeitar o Zump Beyond</span> – Mesmo sendo um bot, há uma equipe trabalhando para mantê-lo. Xingar, sexualizar ou espalhar ódio gratuito resultará em punição.</li>
+            <li><span class="highlight">Tentar enganar, ameaçar ou prejudicar outros usuários</span> – O respeito na comunidade é essencial. Ações mal-intencionadas contra outros usuários não serão toleradas.</li>
+            <li><span class="highlight">Importunar a equipe do Zump Beyond sobre banimentos</span> – Se um amigo foi banido, não fique pressionando a equipe em servidores oficiais ou privados. Existe um sistema de apelação para isso. Insistir pode aumentar o tempo de ban ou torná-lo permanente.</li>
+            <li><span class="highlight">Se responsabilizar pela sua própria conta</span> – Se outra pessoa usar sua conta para quebrar regras, você será banido. Não compartilhe sua conta para evitar problemas.</li>
+        </ul>
+
+        <div class="footer">
+            <p>© 2025 Zump Beyond. Todos os direitos reservados. <a href="#">Política de Privacidade</a> | <a href="#">Suporte</a></p>
+        </div>
+    </div>
+
+    <!-- Botão de voltar ao topo -->
+    <button class="back-to-top" onclick="scrollToTop()">⬆️</button>
+
+    <script>
+        // Função para alternar o tema
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            themeToggle.textContent = body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        });
+
+        // Função para voltar ao topo
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Mostrar ou ocultar
