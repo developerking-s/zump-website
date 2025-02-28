@@ -138,13 +138,19 @@
         }
 
         /* Botão de alternância de tema */
-        .theme-toggle {
+        .theme-toggle,
+        .audio-toggle {
             background: none;
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
             color: #333;
             margin-left: 10px;
+        }
+
+        body.dark-mode .theme-toggle,
+        body.dark-mode .audio-toggle {
+            color: #f0f0f0;
         }
 
         /* Botão de Login */
@@ -410,10 +416,11 @@
                 <li><a href="#features">Recursos</a></li>
                 <li><a href="#stats">Estatísticas</a></li>
             </ul>
-            <a href="index.js" class="login-btn">
-                <i class="fab fa-discord"></i> Login
-            </a>
+            <a hr
             <button class="theme-toggle" id="theme-toggle">🌗</button>
+            <button class="audio-toggle" id="audio-toggle">
+                <i class="fas fa-volume-up"></i>
+            </button>
             <div class="menu-toggle" id="menu-toggle">
                 <span></span><span></span><span></span>
             </div>
@@ -481,7 +488,68 @@
         </div>
     </footer>
 
+    <!-- Player de Áudio do YouTube (invisível) -->
+    <div id="player"></div>
+
     <script>
+        // Carregar a API do YouTube IFrame Player
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        var isPlaying = false;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '0',
+                width: '0',
+                videoId: 'dQw4w9WgXcQ', // Substitua pelo ID do vídeo do YouTube
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0,
+                    'disablekb': 1,
+                    'enablejsapi': 1,
+                    'fs': 0,
+                    'iv_load_policy': 3,
+                    'modestbranding': 1,
+                    'playsinline': 1,
+                    'rel': 0,
+                    'showinfo': 0
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            // O player está pronto
+        }
+
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.PLAYING) {
+                isPlaying = true;
+            } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
+                isPlaying = false;
+            }
+        }
+
+        // Controle de áudio
+        const audioToggle = document.getElementById('audio-toggle');
+        audioToggle.addEventListener('click', () => {
+            if (isPlaying) {
+                player.pauseVideo();
+                audioToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
+            } else {
+                player.playVideo();
+                audioToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
+            }
+        });
+
+        // Alternância de tema
         const themeToggle = document.getElementById('theme-toggle');
         const body = document.body;
 
