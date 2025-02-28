@@ -6,6 +6,16 @@
     <title>Documentação do Bot</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* Variáveis CSS para personalização */
+        :root {
+            --cor-primaria: #0073e6;
+            --cor-secundaria: #005bb5;
+            --cor-fundo: #f9f9f9;
+            --cor-texto: #333;
+            --cor-branca: #fff;
+            --sombra: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
         /* Reset CSS */
         * {
             margin: 0;
@@ -16,17 +26,17 @@
         body {
             font-family: 'Arial', sans-serif;
             line-height: 1.6;
-            background-color: #f9f9f9;
-            color: #333;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
         }
 
         /* Cabeçalho */
         header {
-            background: #0073e6;
-            color: #fff;
+            background: var(--cor-primaria);
+            color: var(--cor-branca);
             padding: 20px 0;
             text-align: center;
-            border-bottom: 4px solid #005bb5;
+            border-bottom: 4px solid var(--cor-secundaria);
         }
 
         header h1 {
@@ -39,12 +49,14 @@
             opacity: 0.9;
         }
 
-        /* Navegação */
+        /* Menu de Navegação */
         nav {
-            background: #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background: var(--cor-branca);
+            box-shadow: var(--sombra);
             padding: 10px 0;
-            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         nav ul {
@@ -52,18 +64,19 @@
             display: flex;
             justify-content: center;
             gap: 20px;
+            flex-wrap: wrap;
         }
 
         nav ul li a {
             text-decoration: none;
-            color: #0073e6;
+            color: var(--cor-primaria);
             font-weight: bold;
             font-size: 1.1rem;
             transition: color 0.3s;
         }
 
         nav ul li a:hover {
-            color: #005bb5;
+            color: var(--cor-secundaria);
         }
 
         /* Conteúdo Principal */
@@ -75,15 +88,15 @@
 
         section {
             margin-bottom: 40px;
-            background: #fff;
+            background: var(--cor-branca);
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--sombra);
         }
 
         section h2 {
             font-size: 2rem;
-            color: #0073e6;
+            color: var(--cor-primaria);
             margin-bottom: 15px;
             display: flex;
             align-items: center;
@@ -114,22 +127,41 @@
             padding: 3px 6px;
             border-radius: 4px;
             font-family: 'Courier New', monospace;
-            color: #333;
+            color: var(--cor-texto);
         }
 
         /* Rodapé */
         footer {
-            background: #0073e6;
-            color: #fff;
+            background: var(--cor-primaria);
+            color: var(--cor-branca);
             text-align: center;
             padding: 20px 0;
             margin-top: 40px;
-            border-top: 4px solid #005bb5;
+            border-top: 4px solid var(--cor-secundaria);
         }
 
         footer p {
             font-size: 1rem;
             opacity: 0.9;
+        }
+
+        /* Botão de Mudar Fundo */
+        #mudar-fundo {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--cor-primaria);
+            color: var(--cor-branca);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: var(--sombra);
+            transition: background 0.3s;
+        }
+
+        #mudar-fundo:hover {
+            background: var(--cor-secundaria);
         }
 
         /* Responsividade */
@@ -142,6 +174,13 @@
             section h2 {
                 font-size: 1.8rem;
             }
+
+            #mudar-fundo {
+                bottom: 10px;
+                right: 10px;
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
@@ -152,7 +191,7 @@
         <p>Guia completo para configurar e utilizar o bot de forma eficiente.</p>
     </header>
 
-    <!-- Navegação -->
+    <!-- Menu de Navegação -->
     <nav>
         <ul>
             <li><a href="#introducao"><i class="fas fa-home"></i> Introdução</a></li>
@@ -169,6 +208,12 @@
             <h2><i class="fas fa-home"></i> Introdução</h2>
             <p>Bem-vindo à documentação oficial do Bot. Este guia foi criado para ajudá-lo a configurar, utilizar e tirar o máximo proveito das funcionalidades do bot. Aqui você encontrará informações detalhadas sobre comandos, configurações e suporte.</p>
             <p>O bot foi projetado para automatizar tarefas, melhorar a produtividade e fornecer suporte rápido e eficiente. Siga as instruções abaixo para começar.</p>
+            <p><strong>Recursos Principais:</strong></p>
+            <ul>
+                <li>Automatização de tarefas repetitivas.</li>
+                <li>Integração com diversas plataformas.</li>
+                <li>Suporte 24/7 com respostas automáticas.</li>
+            </ul>
         </section>
 
         <!-- Comandos -->
@@ -182,6 +227,7 @@
                 <li><code>/info</code> - Exibe informações sobre o bot e sua versão.</li>
                 <li><code>/status</code> - Verifica o status atual do bot.</li>
             </ul>
+            <p><strong>Dica:</strong> Use o comando <code>/help</code> para obter uma lista completa de comandos.</p>
         </section>
 
         <!-- Configuração -->
@@ -204,6 +250,7 @@
             <ul>
                 <li><i class="fas fa-envelope"></i> <strong>Email:</strong> suporte@bot.com</li>
                 <li><i class="fas fa-comments"></i> <strong>Chat Online:</strong> Disponível 24/7 no nosso site.</li>
+                <li><i class="fas fa-phone"></i> <strong>Telefone:</strong> (11) 1234-5678</li>
             </ul>
             <p>Nossa equipe de suporte está sempre pronta para ajudar com qualquer dúvida ou problema.</p>
         </section>
@@ -211,7 +258,31 @@
 
     <!-- Rodapé -->
     <footer>
-        <p>&copy; 2025 Zump Bot. Todos os direitos reservados.</p>
+        <p>&copy; 2023 Documentação do Bot. Todos os direitos reservados.</p>
     </footer>
+
+    <!-- Botão de Mudar Fundo -->
+    <button id="mudar-fundo">Mudar Fundo</button>
+
+    <!-- Script para Mudar o Fundo -->
+    <script>
+        const botaoFundo = document.getElementById('mudar-fundo');
+        const body = document.body;
+
+        botaoFundo.addEventListener('click', () => {
+            body.classList.toggle('fundo-escuro');
+        });
+
+        // Adiciona um fundo escuro alternativo
+        const style = document.createElement('style');
+        style.innerHTML = `
+            .fundo-escuro {
+                --cor-fundo: #1e1e1e;
+                --cor-texto: #f9f9f9;
+                --cor-branca: #333;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 </html>
