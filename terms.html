@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta property="og:title" content="Termos do Zump">
+   <meta property="og:title" content="Termos do Zump">
     <meta property="og:description" content="Veja mais sobre os termos de uso e privacidade e o que não pode fazer e o que pode fazer e as consequências">
     <meta property="og:image" content="https://imgur.com/Nnmgjtz.png">
     <meta name="theme-color" content="#4682b4">
-    <link rel="icon" href="https://imgur.com/Nnmgjtz.jpg">  
-<meta charset="UTF-8">
+    <link rel="icon" href="https://imgur.com/Nnmgjtz.jpg"> 
+ <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Termos do Zump</title>
+    <title>Termos de Uso - Zump Beyond</title>
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* Estilos gerais */
         body {
@@ -133,6 +135,9 @@
             cursor: pointer;
             font-size: 1em;
             transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
         .menu button:hover {
@@ -161,6 +166,11 @@
             font-size: 1.2em;
             display: none;
             transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
         }
 
         .back-to-top:hover {
@@ -203,8 +213,12 @@
 <body>
     <!-- Menu de navegação -->
     <div class="menu">
-        <button id="theme-toggle">🌙</button>
-        <button onclick="scrollToTop()">⬆️ Voltar ao Início</button>
+        <button id="theme-toggle">
+            <i class="fas fa-moon"></i> Tema
+        </button>
+        <button onclick="scrollToTop()">
+            <i class="fas fa-arrow-up"></i> Topo
+        </button>
     </div>
 
     <!-- Conteúdo principal -->
@@ -236,7 +250,9 @@
     </div>
 
     <!-- Botão de voltar ao topo -->
-    <button class="back-to-top" onclick="scrollToTop()">⬆️</button>
+    <button class="back-to-top" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <script>
         // Função para alternar o tema
@@ -245,7 +261,12 @@
 
         themeToggle.addEventListener('click', () => {
             body.classList.toggle('dark-mode');
-            themeToggle.textContent = body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            const icon = themeToggle.querySelector('i');
+            if (body.classList.contains('dark-mode')) {
+                icon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                icon.classList.replace('fa-sun', 'fa-moon');
+            }
         });
 
         // Função para voltar ao topo
@@ -253,4 +274,15 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Mostrar ou ocultar
+        // Mostrar ou ocultar o botão de voltar ao topo
+        window.addEventListener('scroll', () => {
+            const backToTopButton = document.querySelector('.back-to-top');
+            if (window.scrollY > 300) {
+                backToTopButton.style.display = 'flex';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
