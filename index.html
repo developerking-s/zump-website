@@ -9,16 +9,53 @@
     <meta name="theme-color" content="#4682b4">
     <link rel="icon" href="https://imgur.com/Nnmgjtz.jpg">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <title>Zump Bot</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* Reset e configurações globais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Arial', sans-serif;
-            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
             overflow-x: hidden;
+            background: #f0f2f5;
             transition: background 0.5s, color 0.5s;
-            position: relative;
-            background: #1e3c72;
+        }
+
+        /* Modo Escuro */
+        body.dark-mode {
+            background: #1a1a1a;
+            color: #f0f0f0;
+        }
+
+        body.dark-mode header,
+        body.dark-mode footer {
+            background: rgba(0, 0, 0, 0.9);
+            color: #f0f0f0;
+        }
+
+        body.dark-mode .feature,
+        body.dark-mode .stat {
+            background: #2a2a2a;
+            color: #f0f0f0;
+        }
+
+        body.dark-mode .btn {
+            background: #0077b6;
+            color: #f0f0f0;
+        }
+
+        body.dark-mode .btn:hover {
+            background: #005f8a;
+        }
+
+        body.dark-mode .footer-links a {
+            color: #f0f0f0;
         }
 
         /* Fundo de bolinhas animado */
@@ -36,7 +73,7 @@
             position: absolute;
             width: 10px;
             height: 10px;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(0, 119, 182, 0.1);
             border-radius: 50%;
             animation: move 10s linear infinite;
         }
@@ -48,8 +85,8 @@
 
         /* Header */
         header {
-            background: rgba(30, 60, 114, 0.9);
-            color: white;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
@@ -58,6 +95,7 @@
             top: 0;
             z-index: 1000;
             backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .logo {
@@ -65,6 +103,7 @@
             align-items: center;
             font-size: 1.5rem;
             font-weight: bold;
+            color: #0077b6;
         }
 
         .logo img {
@@ -74,7 +113,12 @@
             margin-right: 10px;
         }
 
-        nav { display: flex; align-items: center; }
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
         ul.menu {
             list-style: none;
             display: flex;
@@ -82,14 +126,16 @@
         }
 
         ul.menu li a {
-            color: white;
+            color: #333;
             text-decoration: none;
             font-weight: bold;
             font-size: 0.9rem;
             transition: color 0.3s;
         }
 
-        ul.menu li a:hover { color: #ffeb3b; }
+        ul.menu li a:hover {
+            color: #0077b6;
+        }
 
         /* Botão de alternância de tema */
         .theme-toggle {
@@ -97,43 +143,104 @@
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
-            color: white;
+            color: #333;
             margin-left: 10px;
         }
 
+        /* Botão de Login */
+        .login-btn {
+            background: #0077b6;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #005f8a;
+        }
+
+        .login-btn i {
+            font-size: 1.2rem;
+        }
+
         /* Menu responsivo */
-        .menu-toggle { display: none; cursor: pointer; }
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+        }
+
         .menu-toggle span {
             display: block;
             width: 20px;
             height: 3px;
             margin: 4px;
-            background: white;
+            background: #333;
         }
 
         @media (max-width: 768px) {
-            ul.menu { 
+            ul.menu {
                 display: none;
                 flex-direction: column;
-                background: rgba(30, 60, 114, 0.9);
+                background: rgba(255, 255, 255, 0.9);
                 padding: 1rem;
                 position: absolute;
                 top: 60px;
                 right: 10px;
                 border-radius: 5px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             }
-            ul.menu.active { display: flex; }
-            .menu-toggle { display: block; }
+            ul.menu.active {
+                display: flex;
+            }
+            .menu-toggle {
+                display: block;
+            }
         }
 
         /* Hero Section */
         .hero {
             text-align: center;
             padding: 8rem 2rem;
+            color: #333;
         }
 
-        .hero h1 { font-size: 3rem; }
-        .hero p { font-size: 1.5rem; margin-bottom: 2rem; }
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeIn 2s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
 
         .btn-container {
             display: flex;
@@ -164,108 +271,111 @@
             font-size: 1.2rem;
         }
 
-        /* Seção de Utilidades (Sem Embeds) */
+        /* Seção de Utilidades */
         .features {
             display: flex;
             justify-content: center;
             gap: 2rem;
             flex-wrap: wrap;
             padding: 4rem 2rem;
-            background: rgba(255, 255, 255, 0.1);
+            background: white;
             margin: 2rem 0;
         }
 
         .feature {
-            background: rgba(255, 255, 255, 0.1);
+            background: white;
             padding: 2rem;
             border-radius: 10px;
             text-align: center;
             width: 300px;
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .feature:hover {
             transform: translateY(-10px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
         }
 
         .feature i {
             font-size: 3rem;
             margin-bottom: 1rem;
+            color: #0077b6;
         }
 
         .feature h2 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
+            color: #333;
         }
 
         .feature p {
             font-size: 1rem;
-            color: #ddd;
+            color: #666;
         }
 
-        /* Seção de Estatísticas (Com Embeds) */
+        /* Seção de Estatísticas */
         .stats {
             display: flex;
             justify-content: center;
             gap: 2rem;
             flex-wrap: wrap;
             padding: 4rem 2rem;
-            background: rgba(255, 255, 255, 0.1);
+            background: white;
             margin: 2rem 0;
         }
 
         .stat {
-            background: rgba(0, 0, 0, 0.8);
+            background: white;
             padding: 2rem;
             border-radius: 15px;
             text-align: center;
             width: 320px;
             overflow: hidden;
-            box-shadow: 0 0 20px rgba(0, 119, 182, 0.5);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .stat::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(0, 119, 182, 0.4), transparent);
-            animation: pulse 5s linear infinite;
-            z-index: -1;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.7; }
-            50% { transform: scale(1.2); opacity: 0.5; }
-            100% { transform: scale(1); opacity: 0.7; }
+        .stat:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
         }
 
         .stat i {
             font-size: 3rem;
             margin-bottom: 1rem;
-            color: #4682b4;
+            color: #0077b6;
         }
 
         .stat h2 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
-            color: #fff;
+            color: #333;
         }
 
         .stat p {
             font-size: 1.2rem;
-            color: #ddd;
+            color: #666;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Footer */
         footer {
-            background: rgba(30, 60, 114, 0.9);
-            color: white;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
             text-align: center;
             padding: 3rem 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .footer-links {
@@ -277,15 +387,16 @@
         }
 
         .footer-links a {
-            color: white;
+            color: #333;
             text-decoration: none;
         }
 
-        .footer-links a:hover { text-decoration: underline; }
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
-
     <!-- Fundo animado -->
     <div class="background"></div>
 
@@ -299,6 +410,9 @@
                 <li><a href="#features">Recursos</a></li>
                 <li><a href="#stats">Estatísticas</a></li>
             </ul>
+            <a href="#" class="login-btn">
+                <i class="fab fa-discord"></i> Login
+            </a>
             <button class="theme-toggle" id="theme-toggle">🌗</button>
             <div class="menu-toggle" id="menu-toggle">
                 <span></span><span></span><span></span>
@@ -308,7 +422,7 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <h1>Bem-vindo(a) ao Zump Website</h1>
+        <h1>Website do Zump Beyond</h1>
         <p>Traga diversão e organização ao seu servidor com nosso bot completo!</p>
         <div class="btn-container">
             <a href="#" class="btn"><i class="fas fa-plus"></i>Adicionar</a>
@@ -316,7 +430,7 @@
         </div>
     </section>
 
-    <!-- Seção de Utilidades (Sem Embeds) -->
+    <!-- Seção de Utilidades -->
     <section class="features" id="features">
         <div class="feature">
             <i class="fas fa-tools"></i>
@@ -335,22 +449,22 @@
         </div>
     </section>
 
-    <!-- Seção de Estatísticas (Com Embeds) -->
+    <!-- Seção de Estatísticas -->
     <section class="stats" id="stats">
         <div class="stat">
             <i class="fas fa-server"></i>
             <h2>Servidores</h2>
-            <p>500+</p>
+            <p class="stat-number">500+</p>
         </div>
         <div class="stat">
             <i class="fas fa-users"></i>
             <h2>Usuários</h2>
-            <p>50.000+</p>
+            <p class="stat-number">50.000+</p>
         </div>
         <div class="stat">
             <i class="fas fa-clock"></i>
             <h2>Uptime</h2>
-            <p>99.9%</p>
+            <p class="stat-number">99.9%</p>
         </div>
     </section>
 
@@ -371,20 +485,12 @@
         const themeToggle = document.getElementById('theme-toggle');
         const body = document.body;
 
-        const themes = ['default', 'dark-mode', 'light-mode'];
-        let currentThemeIndex = 0;
-
         themeToggle.addEventListener('click', () => {
-            body.classList.remove(themes[currentThemeIndex]);
-            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-            body.classList.add(themes[currentThemeIndex]);
-
-            if (themes[currentThemeIndex] === 'dark-mode') {
-                themeToggle.textContent = '🌙';
-            } else if (themes[currentThemeIndex] === 'light-mode') {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
                 themeToggle.textContent = '☀️';
             } else {
-                themeToggle.textContent = '🌗';
+                themeToggle.textContent = '🌙';
             }
         });
 
@@ -401,7 +507,26 @@
             span.style.animationDuration = `${Math.random() * 10 + 5}s`;
             background.appendChild(span);
         }
-    </script>
 
+        // Animação dos números
+        const statNumbers = document.querySelectorAll('.stat-number');
+        statNumbers.forEach((number) => {
+            const target = +number.innerText.replace('+', '');
+            let count = 0;
+            const increment = target / 100;
+
+            const updateNumber = () => {
+                if (count < target) {
+                    count += increment;
+                    number.innerText = Math.ceil(count) + (number.innerText.includes('+') ? '+' : '');
+                    requestAnimationFrame(updateNumber);
+                } else {
+                    number.innerText = target + (number.innerText.includes('+') ? '+' : '');
+                }
+            };
+
+            updateNumber();
+        });
+    </script>
 </body>
 </html>
