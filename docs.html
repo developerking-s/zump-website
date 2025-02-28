@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Documentação do Bot</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <style>
         /* Variáveis CSS para personalização */
         :root {
@@ -53,17 +54,15 @@
         nav {
             background: var(--cor-branca);
             box-shadow: var(--sombra);
-            padding: 10px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            padding: 20px 0;
+            margin-bottom: 20px;
         }
 
         nav ul {
             list-style: none;
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 30px;
             flex-wrap: wrap;
         }
 
@@ -73,10 +72,13 @@
             font-weight: bold;
             font-size: 1.1rem;
             transition: color 0.3s;
+            padding: 10px 15px;
+            border-radius: 5px;
         }
 
         nav ul li a:hover {
-            color: var(--cor-secundaria);
+            background: var(--cor-primaria);
+            color: var(--cor-branca);
         }
 
         /* Conteúdo Principal */
@@ -130,6 +132,41 @@
             color: var(--cor-texto);
         }
 
+        /* Formulário de Suporte */
+        .formulario-suporte {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .formulario-suporte input,
+        .formulario-suporte textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .formulario-suporte textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .formulario-suporte button {
+            background: var(--cor-primaria);
+            color: var(--cor-branca);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .formulario-suporte button:hover {
+            background: var(--cor-secundaria);
+        }
+
         /* Rodapé */
         footer {
             background: var(--cor-primaria);
@@ -145,25 +182,6 @@
             opacity: 0.9;
         }
 
-        /* Botão de Mudar Fundo */
-        #mudar-fundo {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--cor-primaria);
-            color: var(--cor-branca);
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            box-shadow: var(--sombra);
-            transition: background 0.3s;
-        }
-
-        #mudar-fundo:hover {
-            background: var(--cor-secundaria);
-        }
-
         /* Responsividade */
         @media (max-width: 768px) {
             nav ul {
@@ -173,13 +191,6 @@
 
             section h2 {
                 font-size: 1.8rem;
-            }
-
-            #mudar-fundo {
-                bottom: 10px;
-                right: 10px;
-                padding: 8px 16px;
-                font-size: 0.9rem;
             }
         }
     </style>
@@ -208,12 +219,6 @@
             <h2><i class="fas fa-home"></i> Introdução</h2>
             <p>Bem-vindo à documentação oficial do Bot. Este guia foi criado para ajudá-lo a configurar, utilizar e tirar o máximo proveito das funcionalidades do bot. Aqui você encontrará informações detalhadas sobre comandos, configurações e suporte.</p>
             <p>O bot foi projetado para automatizar tarefas, melhorar a produtividade e fornecer suporte rápido e eficiente. Siga as instruções abaixo para começar.</p>
-            <p><strong>Recursos Principais:</strong></p>
-            <ul>
-                <li>Automatização de tarefas repetitivas.</li>
-                <li>Integração com diversas plataformas.</li>
-                <li>Suporte 24/7 com respostas automáticas.</li>
-            </ul>
         </section>
 
         <!-- Comandos -->
@@ -227,7 +232,6 @@
                 <li><code>/info</code> - Exibe informações sobre o bot e sua versão.</li>
                 <li><code>/status</code> - Verifica o status atual do bot.</li>
             </ul>
-            <p><strong>Dica:</strong> Use o comando <code>/help</code> para obter uma lista completa de comandos.</p>
         </section>
 
         <!-- Configuração -->
@@ -240,19 +244,18 @@
                 <li>Altere as opções conforme necessário, como idioma, notificações e permissões.</li>
                 <li>Salve as alterações e reinicie o bot para aplicar as novas configurações.</li>
             </ol>
-            <p><strong>Dica:</strong> Consulte a seção de suporte caso encontre dificuldades durante a configuração.</p>
         </section>
 
         <!-- Suporte -->
         <section id="suporte">
             <h2><i class="fas fa-life-ring"></i> Suporte</h2>
-            <p>Se você precisar de ajuda, estamos à disposição para auxiliá-lo. Entre em contato conosco através dos seguintes canais:</p>
-            <ul>
-                <li><i class="fas fa-envelope"></i> <strong>Email:</strong> suporte@bot.com</li>
-                <li><i class="fas fa-comments"></i> <strong>Chat Online:</strong> Disponível 24/7 no nosso site.</li>
-                <li><i class="fas fa-phone"></i> <strong>Telefone:</strong> (11) 1234-5678</li>
-            </ul>
-            <p>Nossa equipe de suporte está sempre pronta para ajudar com qualquer dúvida ou problema.</p>
+            <p>Se você precisar de ajuda, estamos à disposição para auxiliá-lo. Preencha o formulário abaixo para entrar em contato conosco:</p>
+            <form class="formulario-suporte" id="formulario-suporte">
+                <input type="text" id="nome" placeholder="Seu nome" required>
+                <input type="email" id="email" placeholder="Seu e-mail" required>
+                <textarea id="mensagem" placeholder="Descreva o seu problema ou dúvida" required></textarea>
+                <button type="submit">Enviar Mensagem</button>
+            </form>
         </section>
     </main>
 
@@ -261,28 +264,20 @@
         <p>&copy; 2023 Documentação do Bot. Todos os direitos reservados.</p>
     </footer>
 
-    <!-- Botão de Mudar Fundo -->
-    <button id="mudar-fundo">Mudar Fundo</button>
-
-    <!-- Script para Mudar o Fundo -->
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        const botaoFundo = document.getElementById('mudar-fundo');
-        const body = document.body;
-
-        botaoFundo.addEventListener('click', () => {
-            body.classList.toggle('fundo-escuro');
+        // Função para enviar o formulário
+        document.getElementById('formulario-suporte').addEventListener('submit', function (e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Mensagem Enviada!',
+                text: 'Obrigado por entrar em contato. Responderemos em breve.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+            document.getElementById('formulario-suporte').reset();
         });
-
-        // Adiciona um fundo escuro alternativo
-        const style = document.createElement('style');
-        style.innerHTML = `
-            .fundo-escuro {
-                --cor-fundo: #1e1e1e;
-                --cor-texto: #f9f9f9;
-                --cor-branca: #333;
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>
